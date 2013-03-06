@@ -1,0 +1,84 @@
+/* @override http://33.33.33.101/css/main.css */
+
+body {
+	font-family: "Titillium Web"!important;
+}
+
+#searchbox {
+	width: 100%;
+}
+
+#app-es-map {
+    height: 100%;
+    min-height: 100%;
+}
+
+#details {
+	width: 230px;
+	display: block;
+	position: absolute;
+	z-index:9999;
+	background: rgba(40,40,40,0.8);
+	top: 45px;
+	padding: 10px;
+	color: #d5d5d5;
+	overflow: auto;
+    height: 100%;
+    min-height: 100%;
+	
+}
+
+div.olControlZoom {
+    right: 10px;
+    left: auto!important;
+    padding: 3px;
+}
+
+div.olControlZoom a {
+    background: #797979!important;
+    background: rgba(121, 121, 121, 0.5);
+}
+
+#details .header, 
+#details ul.indicators li {
+	background-color: #797979;
+	padding-right: 5px;
+	padding-left: 5px;
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+#details ul.indicators {
+	margin: 0;
+}
+
+#details ul.indicators li {
+	list-style: none;
+	margin-top: 10px;
+}
+
+#details ul.indicators li h4 {
+	font-size: 14px;
+}
+
+#details ul.indicators li h4.disabled {
+	color: #919191;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+}
+
+html, body {
+    height: 97%;
+}
+
+.fill {
+    min-height: 100%;
+    height: 100%;
+	margin-top: -14px;
+}
+
+#map img { max-width:none; }
