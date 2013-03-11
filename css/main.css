@@ -4,23 +4,58 @@ body {
 	font-family: "Titillium Web"!important;
 }
 
-#searchbox {
-	width: 100%;
+html, body {
+    margin  : 0;
+    padding : 0;
+    height  : 100%;
+    width   : 100%;
+}
+@media only screen and (max-width: 600px) {
+    html, body {
+        height  : 117%;
+    }
 }
 
 #app-es-map {
-    height: 100%;
-    min-height: 100%;
+    width    : 100%;
+    position : relative;
+    height   : 100%;
+}
+
+#loader {
+    width    : 100%;
+    position : absolute;
+    height   : 100%;
+    z-index: 9999;
+	background-color: #feffff;
+	display: block;
+	top: 0;
+	left: 0;
+	opacity: 0.8;
+}
+
+.searchbar {
+	top:  0px;
+	right: 0px;
+	display: block;
+	position: absolute;	
+	z-index:1000;
+	background: rgba(40,40,40,0.8);
+	padding: 10px;
+}
+
+#searchbox {
+	width: 100%;
 }
 
 #details {
 	width: 230px;
 	display: block;
 	position: absolute;
-	z-index:9999;
+	z-index:1000;
 	background: rgba(40,40,40,0.8);
-	top: 45px;
-	padding: 10px;
+	top: 0;
+	padding: 0;
 	color: #d5d5d5;
 	overflow: auto;
     height: 100%;
@@ -30,8 +65,20 @@ body {
 
 div.olControlZoom {
     right: 10px;
+    top: 100px!important;
     left: auto!important;
     padding: 3px;
+}
+
+.olControlAttribution {
+    position      : absolute;
+    font-size     : 10px;
+    bottom        : 0 !important;
+    right         : 0 !important;
+    background    : rgba(0,0,0,0.1);
+    font-family   : Arial;
+    padding       : 2px 4px;
+    border-radius : 5px 0 0 0;
 }
 
 div.olControlZoom a {
@@ -45,7 +92,10 @@ div.olControlZoom a {
 	padding-right: 5px;
 	padding-left: 5px;
 	overflow: hidden;
-	margin-top: 5px;
+	margin-top: 10px;
+	border: 3px solid #797979;
+	margin-right: 10px;
+	margin-left: 10px;
 }
 
 #details ul.indicators {
@@ -57,6 +107,11 @@ div.olControlZoom a {
 	margin-top: 10px;
 }
 
+#details ul.indicators li:hover {
+	border-color: #0096ff;
+	cursor: pointer;
+}
+
 #details ul.indicators li h4 {
 	font-size: 14px;
 }
@@ -65,15 +120,73 @@ div.olControlZoom a {
 	color: #919191;
 }
 
+#rankings {
+	width: 430px;
+	display: block;
+	position: absolute;
+	z-index:1000;
+	background: rgba(40,40,40,0.8);
+	bottom: 0;
+	right: 0px;
+	padding: 10px;
+	color: #d5d5d5;
+}
+
+#rankings ul {
+	margin-left: 0px!important;
+}
+
+#rankings ul li.label {
+	list-style: none;
+	padding: 3px;
+	background: none!important;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+#rankings ul li.hospital {
+	list-style: none;
+	padding: 3px;
+}
+
+#rankings ul li.hospital:hover {
+	background-color: #797979;
+	cursor: pointer;
+}
+
+#rankings ul li.hospital span.name {
+	width: 133px;
+	overflow: hidden;		
+	display: inline-block;
+	white-space: nowrap;
+	vertical-align: baseline;
+}
+
+#rankings ul li.hospital span.badge {
+	width: 44px;
+	text-align: center;
+}
+
+#rankings h4 {
+	margin-bottom: 10px;
+	border-bottom: 1px solid #919191;
+	padding-bottom: 10px;
+}
+
+#rankings ul.topten li.hospital span.score {
+	color: #5fbe5f;
+}
+
+#rankings ul.bottomten li.hospital span.score {
+	color: #da524d;
+}
+
 #map {
     width: 100%;
     height: 100%;
     min-height: 100%;
 }
 
-html, body {
-    height: 97%;
-}
 
 .fill {
     min-height: 100%;

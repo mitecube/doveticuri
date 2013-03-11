@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="it" class="fuelux">
+<html lang="it" class="fuelux" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>#doveticuri</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="">
     <meta name="author" content="Mitecube / Wired.it">
 
@@ -17,6 +18,7 @@
     </style>
     <link href="jslib/fuelux/css/fuelux-responsive.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="http://fonts.googleapis.com/css?family=Titillium+Web" />
+    <link href="css/spinner.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
@@ -42,7 +44,7 @@
             <div class="body">
                 <ul class="indicators">
                     {{#indicators}}
-                    <li>
+                    <li class="indicator" href="{{id}}">
                         {{#present}}
                         <h4>{{disease}}</h4>
                         <div class="progress">
@@ -60,23 +62,64 @@
         </div>
     </script>
 
+    <script type="text/html" id="rankingsTemplate">
+        <div id="rankings">
+            <h4>{{disease}}</h4>
+            <ul class="topten pull-left">
+                <li class="label">I migliori</li>
+                {{#topten}}
+                <li class="hospital" href="{{id}}">
+                    <span class="badge badge-success">{{score}}%</span>
+                    <span class="name">{{name}}</span>
+                </li>
+                {{/topten}}
+            </ul>
+            <ul class="bottomten pull-right">
+                <li class="label">I peggiori</li>
+                {{#bottomten}}
+                <li class="hospital" href="{{id}}">
+                    <span class="badge badge-important">{{score}}%</span>
+                    <span class="name">{{name}}</span>
+                </li>
+                {{/bottomten}}
+            </ul>
+        </div>
+    </script>
+
     <script type="text/html" id="appTemplate">
-        <div id="{{prefix}}-search-bar" class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container navbar-form">
-                    <div id="searchbox" class="input-append search">
-                        <input type="text" class="searchquery input-block-level" placeholder="Search">
-                        <button class="searchbutton btn"><i class="icon-search"></i></button>
-                    </div>
-                </div>
+        <div id="{{prefix}}-search-bar" class="searchbar">
+            <div id="searchbox" class="input-append search">
+                <input type="text" class="searchquery span3" placeholder="Cerca ospedale o località...">
+                <button class="searchbutton btn"><i class="icon-search"></i></button>
             </div>
         </div>
 
-        <div id="{{prefix}}-map" class="fill">
-            <div id="map"></div>
-        </div>
+        <div id="map"></div>
 
         <div id="{{prefix}}-details"></div>
+
+        <div id="{{prefix}}-rankings"></div>
+
+        <div id="loader">
+            <div id="floatingBarsG">
+                <div class="blockG" id="rotateG_01">
+                </div>
+                <div class="blockG" id="rotateG_02">
+                </div>
+                <div class="blockG" id="rotateG_03">
+                </div>
+                <div class="blockG" id="rotateG_04">
+                </div>
+                <div class="blockG" id="rotateG_05">
+                </div>
+                <div class="blockG" id="rotateG_06">
+                </div>
+                <div class="blockG" id="rotateG_07">
+                </div>
+                <div class="blockG" id="rotateG_08">
+                </div>
+            </div>
+        </div>
 
     </script>
 
@@ -92,6 +135,7 @@
 <script src="jslib/ICanHaz.min.js"></script>
 <script src="jslib/backbone/underscore-min.js"></script>
 <script src="jslib/backbone/backbone-min.js"></script>
+<script src="js/config.js"></script>
 <script src="js/app.js"></script>
 
 </body>

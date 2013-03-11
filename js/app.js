@@ -58,13 +58,26 @@ var esSearchQueryModel = Backbone.Model.extend({
 
     setQueryString: function( str ) {
         var curr = this.toJSON();
-        curr.query.bool.must[0].query_string.query = str;
+        if ( str != '' ) {
+            curr.query.filtered.query = {
+                query_string: {
+                    fields : ["name", "location.city", "location.province", "location.province_ext", "location.region"],
+                    default_operator: "OR",
+                    query: ''
+                }
+            };
+            curr.query.filtered.query.query_string.query = str;
+        } else {
+            curr.query.filtered.query = { match_all: { } };
+        }
         this.set( curr, { silent: true } );
     },
 
     getQueryString: function() {
         var curr = this.toJSON();
-        return curr.query.bool.must[0].query_string.query;
+        if (typeof(curr.query.filtered.query.query_string) == 'undefined')
+            return '';
+        return curr.query.filtered.query.query_string.query;
     },
 
     setDateHistInterval: function( facet_name, interval ) {
@@ -218,6 +231,12 @@ var esSearchResultsModel = Backbone.Model.extend({
         return this.get('hits').hits;
     },
 
+    getFacets: function() {
+        if (!this.hasResults) return null;
+
+        return this.get('facets');
+    },
+
     getTotalHits: function() {
         if (!this.hasResults) return null;
         return this.get('hits').total;
@@ -237,6 +256,7 @@ var esSearchBarView = Backbone.View.extend({
 
     events : {
         'searched #searchbox' : 'search',
+        'cleared #searchbox' : 'search',
         'keyup .searchquery' : 'setQuery'
     },
 
@@ -315,6 +335,7 @@ var esMapView = Backbone.View.extend({
                                 .transform( this.fromProjection, this.toProjection);
 
         this.defaultLayer = new OpenLayers.Layer.OSM('Simple OSM Map', null, {
+            transitionEffect: 'resize',
             eventListeners: {
                 tileloaded: function(evt) {
                     var ctx = evt.tile.getCanvasContext();
@@ -342,37 +363,26 @@ var esMapView = Backbone.View.extend({
         var zoom = this.initialZoom;
 
         var options = {
-//            controls:           [],
+            controls: [
+                new OpenLayers.Control.Attribution(),
+                new OpenLayers.Control.TouchNavigation({
+                    dragPanOptions: {
+                        enableKinetic: true
+                    }
+                }),
+                new OpenLayers.Control.Zoom()
+            ],
             restrictedExtent : this.extent
         };
 
         this.map = new OpenLayers.Map("map", options);
         this.map.addLayer(this.defaultLayer);
         this.map.setCenter(this.center, zoom);
-        var that = this;
-        this.map.events.register("click", map , function(e){
-            that.vent.trigger('hide:details');
-        });
+//        var that = this;
+//        this.map.events.register("click", map , function(e){
+//            that.vent.trigger('hide:details');
+//        });
 
-//        var t = this;
-//        this.$el.empty();
-//        var results = this.model.toJSON();
-//        if ( ( results.hits != undefined ) && ( 0 != results.hits.total ) ) {
-//            for ( hit in results.hits.hits ) {
-//                if ( ( results.hits.hits[ hit ].highlight != undefined ) && ( typeof results.hits.hits[ hit ].highlight != 'string' ) ) {
-//                    results.hits.hits[ hit ].highlight[ this.highlightField ] = results.hits.hits[ hit ].highlight[ this.highlightField ].join( '...' );
-//                }
-//            }
-//            var data = this.default_data;
-//            data.header = this.header;
-//            data.hits = results.hits.hits;
-//            data.number = this.number;
-//            data.total = results.hits.total;
-//
-//            this.$el.append( Mustache.render( this.template, data ) );
-//        } else {
-//            this.$el.append( Mustache.render( this.templateNoResults, { header: this.header } ) );
-//        }
     },
 
     updateMarkers: function() {
@@ -398,7 +408,6 @@ var esMapView = Backbone.View.extend({
             that.markers.addMarker(marker);
         });
 
-
         var bounds = this.markers.getDataExtent();
         this.map.zoomToExtent(bounds);
 
@@ -408,10 +417,19 @@ var esMapView = Backbone.View.extend({
 
 
 var esDetailsView = Backbone.View.extend({
+    nationalStats: null,
+
+    events : {
+        'click li.indicator' : 'indicatorClick'
+    },
+
     initialize: function(options) {
-        _.bindAll(this, "show", "hide");
-        options.vent.bind("show:details", this.show);
-        options.vent.bind("hide:details", this.hide);
+        _.bindAll(this, "show", "hide", "indicatorClick");
+        this.vent = options.vent;
+        this.nationalStats = options.nationalStats;
+        this.vent.bind("show:details", this.show);
+        this.vent.bind("hide:details", this.hide);
+        this.model.bind('search:end', this.hide, this);
         this.render();
     },
 
@@ -420,7 +438,6 @@ var esDetailsView = Backbone.View.extend({
     },
 
     show: function(hit) {
-        this.model = hit;
         this.$el.empty();
         console.debug(hit);
         data = {
@@ -431,11 +448,15 @@ var esDetailsView = Backbone.View.extend({
             indicators: []
         }
 
+        var t = this;
         $.each(hit._source.indicators.properties, function(index, indicator) {
             var indicatorData = {
+                id: index,
                 disease: diseaseCoding[index],
-                present: false
+                present: false,
+                national: t.nationalStats[index]
             }
+
             if (indicator != null) {
                 indicatorData.present = true;
                 indicatorData.dead = indicator;
@@ -449,18 +470,73 @@ var esDetailsView = Backbone.View.extend({
 
     hide: function() {
         this.$el.empty();
+    },
+
+    indicatorClick: function(evt) {
+        evt.preventDefault();
+        indicator = $(evt.currentTarget).attr('href');
+        this.vent.trigger('calculate:topten', indicator);
+    }
+});
+
+var esTopTenView = Backbone.View.extend({
+    initialize: function(options) {
+        _.bindAll(this, "calculate");
+        options.vent.bind("calculate:topten", this.calculate);
+        this.model.bind('search:end', this.hide, this);
+        this.render();
+    },
+
+    render: function( note ) {
+        this.$el.empty();
+    },
+
+    calculate: function(indicator) {
+        this.$el.empty();
+        resultsModel = this.model.resultsModel;
+        hits = resultsModel.getResults();
+
+        // genero una lista di risultati per i quali l'indicatore richiesto non è nullo
+        nonNullList = [];
+        $.each(hits, function(i,v) {
+            if (v._source.indicators.properties[indicator] != null) {
+                nonNullList.push({
+                    id: v._id,
+                    name: v._source.name,
+                    score: v._source.indicators.properties[indicator]
+                });
+            }
+        });
+
+        // ordino la lista in maniera crescente
+        nonNullList.sort(function(a,b) {
+            return a.score < b.score ? -1 : 1;
+        } );
+
+        this.$el.html(ich.rankingsTemplate({
+            disease: diseaseCoding[indicator],
+            topten: nonNullList.slice(0, 10),
+            bottomten: nonNullList.slice(-10).reverse()
+        }));
+    },
+
+    hide: function() {
+        this.$el.empty();
     }
 });
 
 var esMapAppView = Backbone.View.extend({
     query: null,
     vent: null,
+    nationalStats: {},
 
     initialize: function() {
         this.query = this.options.query;
         this.vent = _.extend({}, Backbone.Events);
-        _.bindAll( this, 'render' );
+        _.bindAll( this, 'render', 'updateStats', 'hideLoader', 'showLoader' );
+        this.query.bind('search:start', this.showLoader, this );
         this.query.bind('search:end', this.updateStats, this );
+        this.query.bind('search:end', this.hideLoader, this );
         this.render();
     },
 
@@ -476,12 +552,20 @@ var esMapAppView = Backbone.View.extend({
 
         new esMapView( {
             model: this.query,
-            el: '#' + this.options.id_prefix + '-map',
+            el: '#map',
             vent: this.vent
         } );
 
         new esDetailsView( {
+            model: this.query,
+            nationalStats: this.nationalStats,
             el: '#' + this.options.id_prefix + '-details',
+            vent: this.vent
+        } );
+
+        new esTopTenView( {
+            model: this.query,
+            el: '#' + this.options.id_prefix + '-rankings',
             vent: this.vent
         } );
 
@@ -490,39 +574,83 @@ var esMapAppView = Backbone.View.extend({
     },
 
     updateStats: function() {
-        console.log('Totale risultati: ' + this.query.resultsModel.getTotalHits()
-            + '. Risultati visualizzati: ' + this.query.resultsModel.getNumHits());
+
+        if (Object.keys(this.nationalStats).length == 0) {
+            $.extend (this.nationalStats, this.model.getFacets());
+            console.log(this.nationalStats);
+        }
+
+        console.log('Totale risultati: ' + this.model.getTotalHits()
+            + '. Risultati visualizzati: ' + this.model.getNumHits());
+    },
+
+    showLoader: function() {
+        $('#loader').show();
+    },
+
+    hideLoader: function() {
+        $('#loader').hide();
     }
 
 });
 
-
-var esSearchQuery = new esSearchQueryModel( {
+var basicQuery = {
     query: {
-        bool: {
-            must: [{
-                query_string: {
-                    fields : ["name", "location.city", "location.province", "location.province_ext", "location.region"],
-                    default_operator: "AND",
-                    query: ''
-                }
-            }],
-            must_not: [],
-            should: []
+        filtered: {
+            query: {
+                match_all: { }
+            },
+            filter: {
+                match_all: { }
+            }
         }
     },
     from: 0,
     size: 2000,
     sort: [],
-    facets: {}
-} );
+    facets: {
+        "region": {
+            "terms": {
+                "field": "region"
+            }
+        },
+        "province": {
+            "terms": {
+                "field": "province_ext"
+            }
+        },
+        "property": {
+            "terms": {
+                "field": "property"
+            }
+        },
+        "size": {
+            "terms": {
+                "field": "size"
+            }
+        },
+        "hospitalized": {
+            "statistical": {
+                "field": "hospitalized"
+            }
+        }
+    }
+};
 
+$.each(diseaseCoding, function(indicator, name) {
+    basicQuery.facets[indicator] = {
+        "statistical": {
+            field: "indicators.properties." + indicator
+        }
+    };
+});
+
+var esSearchQuery = new esSearchQueryModel( basicQuery );
 var esSearchResults = new esSearchResultsModel( );
 
 esSearchQuery.resultsModel = esSearchResults;
-esSearchQuery.ajax_url = 'http://33.33.33.101:9200';
+esSearchQuery.ajax_url = elastic_search_url;
 esSearchQuery.index = 'doveticuri';
-
 esSearchQuery.index_type = 'hospital';
 
 var esMapApp = new esMapAppView( {
@@ -531,3 +659,8 @@ var esMapApp = new esMapAppView( {
     el: '#app-es-map',
     id_prefix: 'es-map'
 } );
+
+
+$(function() {
+    esSearchQuery.search();
+})
