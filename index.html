@@ -48,7 +48,7 @@
                         {{#present}}
                         <h4>{{disease}}</h4>
                         <div class="progress">
-                            <div class="bar bar-danger" style="width: {{dead}}%;"></div>
+                            <div class="bar bar-danger" style="width: {{deaths}}%;"></div>
                             <div class="bar bar-success" style="width: {{survivors}}%;"></div>
                         </div>
                         {{/present}}
@@ -59,6 +59,7 @@
                     {{/indicators}}
                 </ul>
             </div>
+
         </div>
     </script>
 
@@ -131,10 +132,12 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="jslib/jquery-1.9.1.min.js"></script>
 <script src="jslib/fuelux/loader.min.js"></script>
+<script src="jslib/bootbox.min.js"></script>
 <script src="jslib/json2.js"></script>
 <script src="jslib/ICanHaz.min.js"></script>
 <script src="jslib/backbone/underscore-min.js"></script>
 <script src="jslib/backbone/backbone-min.js"></script>
+<script src="jslib/protovis/protovis.min.js"></script>
 <script src="js/config.js"></script>
 <script src="js/app.js"></script>
 

@@ -196,7 +196,30 @@ $mapping->setProperties(array(
     ),
     'property'      => array('type' => 'string', 'include_in_all' => FALSE),
     'size'          => array('type' => 'string', 'include_in_all' => FALSE),
-    'hospitalized'  => array('type' => 'long',      'include_in_all' => FALSE),
+    'hospitalized_tot'  => array('type' => 'long', 'include_in_all' => FALSE),
+    'hospitalized'  => array(
+        'type' => 'object',
+        'properties' => array(
+            '1'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '3'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '4'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '5'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '14'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '15'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '18'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '19'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '21'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '35'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '38'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '55'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '63'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '82'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '83'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '84'   => array('type' => 'long', 'include_in_all' => FALSE),
+            '88'   => array('type' => 'long', 'include_in_all' => FALSE),
+
+        ),
+    ),
     'indicators'  => array(
         'type' => 'object',
         'properties' => array(
@@ -228,7 +251,7 @@ $mapping->send();
 
 if ($argc < 3) {
     echo "\nUsage:\t";
-    echo "{$argv[0]} <input-file.csv> <localization-file.kml>\n\n\n";
+    echo "{$argv[0]} <input-file.csv> <input-file-extended.csv> <localization-file.kml>\n\n\n";
     die();
 }
 
@@ -242,10 +265,20 @@ if (($handle = fopen($argv[1], "r")) !== FALSE) {
     fclose($handle);
 }
 
+// Read CSV Extended
+if (($handle = fopen($argv[2], "r")) !== FALSE) {
+    while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        if (empty($row[0])) continue;
+        $id = $row[0];
+        $extdata[$id] = $row;
+    }
+    fclose($handle);
+}
+
 
 // Read KML
 $kml = new DOMDocument();
-$kml->load($argv[2]);
+$kml->load($argv[3]);
 $points = $kml->getElementsByTagName( "Placemark" );
 // For every point, extract the coordinates
 foreach( $points as $point ) {
@@ -258,8 +291,6 @@ foreach( $points as $point ) {
 
 }
 
-
-
 // output csv on STDOUT
 //$fp = STDOUT;
 //foreach ($data as $row) {
@@ -270,16 +301,40 @@ foreach( $points as $point ) {
 // Index in Elastic Search
 $documents = array();
 foreach ($data as $row) {
+    $id = $row[0];
     if (!isset($row[30])) {
-        echo "punto non localizzato codice ISTAT $row[0]\n";
+        echo "punto non localizzato codice ISTAT $id\n";
         continue;
     }
 
     if ($row[30] < 35.4 || $row[30] > 47.08 ||
         $row[31] < 6.60 || $row[31] > 18.6) {
-        echo "punto fuori confini italiani codice ISTAT $row[0]\n";
+        echo "punto fuori confini italiani codice ISTAT $id\n";
         continue;
     }
+
+    $hospitalized = array(
+        'type' => 'object',
+        'properties' => array(
+            '1'    => trim($extdata[$id][23]) != '#N/D' ? intval($extdata[$id][23]) : null,
+            '3'    => trim($extdata[$id][24]) != '#N/D' ? intval($extdata[$id][24]) : null,
+            '4'    => trim($extdata[$id][25]) != '#N/D' ? intval($extdata[$id][25]) : null,
+            '5'    => trim($extdata[$id][26]) != '#N/D' ? intval($extdata[$id][26]) : null,
+            '14'   => trim($extdata[$id][27]) != '#N/D' ? intval($extdata[$id][27]) : null,
+            '15'   => trim($extdata[$id][28]) != '#N/D' ? intval($extdata[$id][28]) : null,
+            '18'   => trim($extdata[$id][29]) != '#N/D' ? intval($extdata[$id][29]) : null,
+            '19'   => trim($extdata[$id][30]) != '#N/D' ? intval($extdata[$id][30]) : null,
+            '21'   => trim($extdata[$id][31]) != '#N/D' ? intval($extdata[$id][31]) : null,
+            '35'   => trim($extdata[$id][32]) != '#N/D' ? intval($extdata[$id][32]) : null,
+            '38'   => trim($extdata[$id][33]) != '#N/D' ? intval($extdata[$id][33]) : null,
+            '55'   => trim($extdata[$id][34]) != '#N/D' ? intval($extdata[$id][34]) : null,
+            '63'   => trim($extdata[$id][35]) != '#N/D' ? intval($extdata[$id][35]) : null,
+            '82'   => trim($extdata[$id][36]) != '#N/D' ? intval($extdata[$id][36]) : null,
+            '83'   => trim($extdata[$id][37]) != '#N/D' ? intval($extdata[$id][37]) : null,
+            '84'   => trim($extdata[$id][38]) != '#N/D' ? intval($extdata[$id][38]) : null,
+            '88'   => trim($extdata[$id][39]) != '#N/D' ? intval($extdata[$id][39]) : null
+        ),
+    );
 
     $documents[] = new \Elastica\Document($row[0], array(
         'id'        => $row[0],
@@ -294,7 +349,8 @@ foreach ($data as $row) {
         ),
         'property'      => $row[10],
         'size'          => $row[11],
-        'hospitalized'  => $row[12],
+        'hospitalized_tot'  => $row[12],
+        'hospitalized'  => $hospitalized,
         'indicators'  => array(
             'type' => 'object',
             'properties' => array(

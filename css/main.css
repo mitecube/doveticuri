@@ -195,3 +195,74 @@ div.olControlZoom a {
 }
 
 #map img { max-width:none; }
+
+.tooltip {
+    z-index: 9999;
+}
+
+/* @group Polar Chart */
+
+#disease_details {
+	z-index: 2;
+	display: block;
+	position: relative;
+	top: -479px;
+	width: 181px;
+	left: 311px;
+	text-align: center;
+}
+
+#disease_legend {
+	z-index:9999;
+	padding: 10px;
+	position: absolute;
+	display: block;
+	width: 300px;
+	top: 192px;
+	right: 37px;
+	background: rgba(88, 82, 84,0.8);
+}
+
+.disease {
+	color: #feffff;
+	display: block;
+}
+
+.disease.title {
+	font-size: 18px;
+	margin-bottom: 7px;
+}
+
+.disease.description {
+	font-style: italic;
+}
+
+#disease_details ul {
+	text-align: left;
+	margin-left: 0;
+	padding: 0 10px 2px;
+}
+
+li.disease li {
+   padding-left: 1em; 
+    text-indent: -.7em;
+}
+li.disease:before {
+    content: "•";
+	font-size: 27px;
+}
+
+li.disease.hospitalized:before {
+	color:  rgba(200, 200, 200, 0.5000);
+}
+
+li.disease.deaths:before {
+	color:  rgba(251, 20, 16, 1.0000);
+}
+
+li.disease.national_deaths:before {
+	color:  rgba(248, 163, 164, 1.0000);
+}
+
+/* @end */
+

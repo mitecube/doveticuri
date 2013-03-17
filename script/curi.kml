@@ -8941,7 +8941,7 @@
 		<SimpleData name="84. Tumor">-</SimpleData>
 		<SimpleData name="88. Infar">-</SimpleData>
 	</SchemaData></ExtendedData>
-      <Point><coordinates>-89.9626799,32.220001</coordinates></Point>
+      <Point><coordinates>11.64912922149,46.724308015092</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#curi">
@@ -9040,7 +9040,7 @@
 		<SimpleData name="84. Tumor">-</SimpleData>
 		<SimpleData name="88. Infar">-</SimpleData>
 	</SchemaData></ExtendedData>
-      <Point><coordinates>-90.5068824,33.190345</coordinates></Point>
+      <Point><coordinates>12.28474833551,46.733889396084</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#curi">
@@ -9271,7 +9271,7 @@
 		<SimpleData name="84. Tumor">-</SimpleData>
 		<SimpleData name="88. Infar">8,5</SimpleData>
 	</SchemaData></ExtendedData>
-      <Point><coordinates>-89.9206512,35.1543524</coordinates></Point>
+      <Point><coordinates>11.859699142848,46.353979833056</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#curi">
@@ -9337,7 +9337,7 @@
 		<SimpleData name="84. Tumor">-</SimpleData>
 		<SimpleData name="88. Infar">-</SimpleData>
 	</SchemaData></ExtendedData>
-      <Point><coordinates>-89.9813445,35.5000984</coordinates></Point>
+      <Point><coordinates>11.608172650858,46.069414392566</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#curi">
@@ -9370,7 +9370,7 @@
 		<SimpleData name="84. Tumor">-</SimpleData>
 		<SimpleData name="88. Infar">6,7</SimpleData>
 	</SchemaData></ExtendedData>
-      <Point><coordinates>-89.3606298,35.2571148</coordinates></Point>
+      <Point><coordinates>11.040182457937,45.881805038574</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#curi">
@@ -9403,7 +9403,7 @@
 		<SimpleData name="84. Tumor">-</SimpleData>
 		<SimpleData name="88. Infar">-</SimpleData>
 	</SchemaData></ExtendedData>
-      <Point><coordinates>-89.4931176,36.4137178</coordinates></Point>
+      <Point><coordinates>10.725901667013,46.041352687431</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#curi">
@@ -9502,7 +9502,7 @@
 		<SimpleData name="84. Tumor">-</SimpleData>
 		<SimpleData name="88. Infar">-</SimpleData>
 	</SchemaData></ExtendedData>
-      <Point><coordinates>-89.9206512,35.1543524</coordinates></Point>
+      <Point><coordinates>11.125075059187,46.062526874004</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#curi">
@@ -9601,8 +9601,20 @@
 		<SimpleData name="84. Tumor">-</SimpleData>
 		<SimpleData name="88. Infar">-</SimpleData>
 	</SchemaData></ExtendedData>
-      <Point><coordinates>-89.3606298,35.2571148</coordinates></Point>
+      <Point><coordinates>11.045650558474,45.898690065312</coordinates></Point>
   </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#curi">
+		<SimpleData name="ISTAT">04200701</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.725901667013,46.041352687431</coordinates></Point>
+  </Placemark>  
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#curi">
+		<SimpleData name="ISTAT">04201601</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>10.880233579789,45.916022106186</coordinates></Point>
+  </Placemark>    
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#curi">
 		<SimpleData name="ISTAT">04202101</SimpleData>
