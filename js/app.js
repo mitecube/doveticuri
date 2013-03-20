@@ -406,24 +406,31 @@ var esMapView = Backbone.View.extend({
                                 .LonLat( this.initialPositionLon,this.initialPositionLat )
                                 .transform( this.fromProjection, this.toProjection);
 
-        this.defaultLayer = new OpenLayers.Layer.OSM('Simple OSM Map', null, {
-            transitionEffect: 'resize',
-            eventListeners: {
-                tileloaded: function(evt) {
-                    var ctx = evt.tile.getCanvasContext();
-                    if (ctx) {
-                        var imgd = ctx.getImageData(0, 0, evt.tile.size.w, evt.tile.size.h);
-                        var pix = imgd.data;
-                        for (var i = 0, n = pix.length; i < n; i += 4) {
-                            pix[i] = pix[i + 1] = pix[i + 2] = (3 * pix[i] + 4 * pix[i + 1] + pix[i + 2]) / 8;
-                        }
-                        ctx.putImageData(imgd, 0, 0);
-                        evt.tile.imgDiv.removeAttribute("crossorigin");
-                        evt.tile.imgDiv.src = ctx.canvas.toDataURL();
-                    }
-                }
-            }
-        });
+//        this.defaultLayer = new OpenLayers.Layer.OSM('Simple OSM Map', null, {
+//            transitionEffect: 'resize',
+//            eventListeners: {
+//                tileloaded: function(evt) {
+//                    var ctx = evt.tile.getCanvasContext();
+//                    if (ctx) {
+//                        var imgd = ctx.getImageData(0, 0, evt.tile.size.w, evt.tile.size.h);
+//                        var pix = imgd.data;
+//                        for (var i = 0, n = pix.length; i < n; i += 4) {
+//                            pix[i] = pix[i + 1] = pix[i + 2] = (3 * pix[i] + 4 * pix[i + 1] + pix[i + 2]) / 8;
+//                        }
+//                        ctx.putImageData(imgd, 0, 0);
+//                        evt.tile.imgDiv.removeAttribute("crossorigin");
+//                        evt.tile.imgDiv.src = ctx.canvas.toDataURL();
+//                    }
+//                }
+//            }
+//        });
+
+        /* GMAP Section */
+        this.defaultLayer = new OpenLayers.Layer.Google(
+            "Google Streets", // the default
+            {numZoomLevels: 20, type: 'styled'}
+        );
+        /* END GMAP Section */
 
         this.vent = options.vent;
         this.model.bind('search:end', this.updateMarkers, this);
@@ -450,10 +457,87 @@ var esMapView = Backbone.View.extend({
             ],
             maxExtent : this.extent
         };
-
         this.map = new OpenLayers.Map("map", options);
         this.map.addLayer(this.defaultLayer);
         this.map.setCenter(this.center, zoom);
+
+
+        /* GMAP Section */
+        var stylez = [
+            {
+                "stylers": [
+                    { "visibility": "simplified" },
+                    { "color": "#add6ca" }
+                ]
+            },{
+                "featureType": "water",
+                "stylers": [
+                    { "visibility": "simplified" },
+                    { "color": "#efe8d5" }
+                ]
+            },{
+                "featureType": "administrative.country",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    { "visibility": "on" },
+                    { "color": "#efe8d5" }
+                ]
+            },{
+                "featureType": "administrative.province",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    { "visibility": "on" },
+                    { "color": "#efe8d5" },
+                    { "weight": 5 }
+                ]
+            },{
+                "featureType": "road",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    { "visibility": "on" },
+                    { "saturation": -81 },
+                    { "lightness": -100 }
+                ]
+            },{
+                "featureType": "road",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    { "visibility": "on" },
+                    { "lightness": -20 },
+                    { "saturation": -80 }
+                ]
+            },{
+                "featureType": "landscape",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    { "visibility": "on" },
+                    { "saturation": -81 },
+                    { "lightness": -50 }
+                ]
+            },{
+                "featureType": "administrative",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    { "visibility": "on" },
+                    { "saturation": -81 },
+                    { "lightness": -50 }
+                ]
+            }
+        ];
+        var styledMapOptions = {
+            name: "Styled Map"
+        };
+        var styledMapType = new google.maps.StyledMapType(stylez, styledMapOptions);
+        this.defaultLayer.mapObject.mapTypes.set('styled', styledMapType);
+        this.defaultLayer.mapObject.setMapTypeId('styled');
+
+        var myKmlOptions = {
+            preserveViewport: true,
+            suppressInfoWindows: true
+        }
+//        var kmlLayer_ITA = new google.maps.KmlLayer("http://doveticuri.mitecube.com/kmz/invert_ITA.kmz", myKmlOptions);
+//        kmlLayer_ITA.setMap(this.defaultLayer.mapObject);
+        /* END GMAP Section */
     },
 
     updateMarkers: function() {
@@ -575,7 +659,8 @@ var esDetailsView = Backbone.View.extend({
     searchStats: null,
 
     events : {
-        'click li.indicator' : 'indicatorClick'
+        'click li.indicator' : 'indicatorClick',
+        'click a.close' : 'hide'
     },
 
     initialize: function(options) {
@@ -625,7 +710,7 @@ var esDetailsView = Backbone.View.extend({
             data.indicators.push(indicatorData)
         })
 
-        console.log(JSON.stringify(data.indicators));
+        //console.log(JSON.stringify(data.indicators));
 
         this.$el.html(ich.detailsTemplate(data));
 
@@ -643,6 +728,10 @@ var esDetailsView = Backbone.View.extend({
 });
 
 var esTopTenView = Backbone.View.extend({
+
+    events : {
+        'click a.close' : 'hide'
+    },
 
     initialize: function(options) {
         _.bindAll(this, "calculate", "hide");

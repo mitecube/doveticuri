@@ -10,9 +10,9 @@ html, body {
     height  : 100%;
     width   : 100%;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 767px) {
     html, body {
-        height  : 117%;
+        padding: 0!important;
     }
 }
 
@@ -52,7 +52,7 @@ html, body {
 	width: 230px;
 	display: block;
 	position: absolute;
-	z-index:1000;
+	z-index:8000;
 	background: rgba(40,40,40,0.8);
 	top: 0;
 	padding: 0;
@@ -96,10 +96,12 @@ div.olControlZoom a {
 	border: 3px solid #797979;
 	margin-right: 10px;
 	margin-left: 10px;
+	display: block;
 }
 
 #details ul.indicators {
 	margin: 0;
+	padding: 0;
 }
 
 #details ul.indicators li {
@@ -124,7 +126,7 @@ div.olControlZoom a {
 	width: 430px;
 	display: block;
 	position: absolute;
-	z-index:1000;
+	z-index:8001;
 	background: rgba(40,40,40,0.8);
 	bottom: 0;
 	right: 0px;
@@ -134,6 +136,16 @@ div.olControlZoom a {
 
 #rankings ul {
 	margin-left: 0px!important;
+}
+
+.close {
+	margin-top: 10px;
+}
+
+#details a.close {
+	position: absolute;
+	right: 15px;
+	top: 6px;
 }
 
 #rankings ul li.label {
@@ -148,11 +160,11 @@ div.olControlZoom a {
 	list-style: none;
 	padding: 3px;
 }
-
+/*
 #rankings ul li.hospital:hover {
 	background-color: #797979;
 	cursor: pointer;
-}
+}*/
 
 #rankings ul li.hospital span.name {
 	width: 133px;
@@ -212,6 +224,7 @@ div.olControlZoom a {
 	text-align: center;
 }
 
+
 #disease_legend {
 	z-index:9999;
 	padding: 10px;
@@ -263,6 +276,134 @@ li.disease.deaths:before {
 li.disease.national_deaths:before {
 	color:  rgba(248, 163, 164, 1.0000);
 }
-
 /* @end */
 
+
+
+/* @group Responsive */
+
+@media only screen and (max-width: 480px) {
+
+	div.olControlZoom {
+	    top: 70px!important;
+	}
+	
+	.searchbar {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}	
+	
+	.searchbar .search {
+		margin-left: 5px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	
+	.searchbar .span3 {
+		width: 85%!important
+	}
+	
+	#details {
+		width: 100%;
+	}	
+		
+	#details p, #details h3, #details h4 {
+		margin: 0;
+	}
+
+	#details div.header {
+		position: fixed;
+		width: 98%!important;
+		height: 80px;
+		overflow: hidden;
+		margin-top: 0;
+		padding-top: 10px;
+		padding-bottom: 3px;
+		padding-right: 0;
+		margin-left: 0;
+		padding: 0;
+		margin: 0;
+	}
+	
+	#details div.header h3 {
+		white-space: nowrap;
+		overflow: hidden;
+		width: 300px;
+	}
+	
+	#details ul.indicators {
+		margin-top: 87px;
+	}
+	
+	#details ul.indicators li {
+		height: 25px;
+		margin-top: 1px;
+		margin-right: 0!important;
+		padding-left: 0;
+		margin-left: 0;
+	}	
+		
+	#details h4	{
+		width: 67%;
+		overflow: hidden;
+		white-space: nowrap;
+		float: left;
+	}
+		
+	#details div.progress {
+		width: 30%;
+		float: right;
+	}
+	
+    #rankings {
+        width: 100%;
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		overflow: scroll;
+	}
+	
+	#rankings h4 {
+		position: fixed;
+		height: 27px;
+		overflow: hidden;
+		padding-top: 12px;
+		background: rgba(40,40,40,0.8);
+		width: 383px;
+		margin-top: 0;
+	}	
+	
+	#rankings .close, #details .close {		
+		opacity: 1.0!important;
+		margin-right: 10px!important;
+		margin-top: 15px!important;
+		position: fixed!important;
+		top: 0px!important;
+		z-index: 9999;
+		right: 0px!important;
+	}
+	
+	#rankings ul:nth-of-type(1) {
+		margin-top: 50px;
+	}
+		
+	#rankings ul {
+		display:block;
+		float: none;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	
+	#rankings h4 {
+		padding-left: 10px;
+		padding-right: 10px;
+	}	
+	
+	#rankings ul li.hospital span.name {
+		width: auto;
+		overflow: visible;		
+	}	
+}
+
+/* @end */
