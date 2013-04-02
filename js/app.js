@@ -561,7 +561,7 @@ var esMapView = Backbone.View.extend({
                     //strokeOpacity: 1,
                     //strokeWidth: 1,
                     //fillOpacity: 1,
-                    externalGraphic: "../images/hicon.png",
+                    externalGraphic: "images/hicon.png",
                     pointRadius: '${calculateRadius}'
                     //pointRadius: 20
                 },{
