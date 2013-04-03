@@ -1,95 +1,6 @@
 ich.grabTemplates();
 
-var diseaseCoding = {
-    '1': {
-        short: 'Infarto1',
-        title: 'Infarto del miocardio',
-        description: 'è il valore riassuntivo di tutti i diversi tipi di intervento per infarto ed è una delle patologie più gravi, con un indice di rischio nazionale del 10,95%'
-    },
-    '3': {
-        short: 'Infarto2',
-        title: 'Infarto del miocardio senza PTCA',
-        description: 'Infarto del miocardio senza PTCA: per PTCA s’intende Angioplastica, la riapertura meccanica della arteria coronaria occlusa. Se non è possibile eseguirla entro 90 minuti, si procede alla riapertura attraverso la somministrazione di farmaci trombolitici. Questo tipo di operazione è meno efficace: il suo indice di rischio nazionale è del 18,18%'
-    },
-    '4': {
-        short: 'Infarto3',
-        title: 'Infarto del miocardio con PTCA',
-        description: 'se l’Angioplastica viene effettuata entro un’ora dalla comparsa dei sintomi, il cuore non presenterà danni permanenti. Oltre le 12-18 ore, invece, la mortalità aumenta notevolmente. L’indice di rischio in Italia è del 5,51%'
-    },
-    '5': {
-        short: 'PTCA',
-        title: 'PTCA eseguita oltre 48h dal ricovero',
-        description: 'si tratti dei casi in cui l’Angioplastica viene eseguita dopo 48 ore dal ricovero. Viene anche chiamata Angioplastica differita.'
-    },
-    '14': {
-        short: 'Bypass',
-        title: 'Bypass',
-        description: 'è l’intervento chirurgico più eseguito. Quando le arterie coronarie si restringono, oltre alla terapia farmacologica e l’angioplastica, si può intervenire prelevando un’arteria del paziente e inserendone un capo a monte del restringimento e l’altro capo a valle. Si crea così un passaggio alternativo che “bypass” l’occlusione'
-    },
-    '15': {
-        short: 'Scompenso',
-        title: 'Scompenso cardiaco',
-        description: 'è un affaticamento del cuore, in cui non è più in grado di pompare sangue efficacemente. Per curarlo, viene eseguita una cardio-riabilitazione'
-    },
-    '18': {
-        short: 'Ictus1',
-        title: 'Ictus, mortalità a 30 giorni',
-        description: 'è in assoluto l’indicatore con l’indice di rischio italiano più alto: 12,12%. Avviene quando un’arteria del cervello si occlude (ictus ischemico) oppure si rompe e comincia a perdere sangue (ictus emorragico)'
-    },
-    '19': {
-        short: 'Ictus2',
-        title: 'Ictus, riammissioni ospedaliere dopo 30 giorni',
-        description: 'rappresenta il rischio in seguito a un nuovo ricovero nel mese successivo alla dimissione con diagnosi di ictus.'
-    },
-    '21': {
-        short: 'BPCO',
-        title: 'BPCO riacutizzata',
-        description: 'si tratta della Bronco-pneumopatia Cronica Ostruttiva ed si verifica quando si ha una progressiva ostruzione dei bronchi. La principale causa è il fumo e il suo indici di rischio nazionale è piuttosto alto: 8,82%'
-    },
-    '35': {
-        short: 'Valvuloplastica',
-        title: 'Intervento di valvuloplastica',
-        description: 'è una degenerazione della valvola che permette il passaggio di sangue dal cuore al resto del corpo. Quando avviene, è necessario sostituirla con una protesi biologica o meccanica. Colpisce principalmente gli anziani tra i 70 e i 90 anni'
-    },
-    '38': {
-        short: 'Femore',
-        title: 'Frattura del collo del femore',
-        description: 'anche questa patologia è prevalente negli anziani a causa dell’impoverimento delle ossa. L’intervento di tipo chirurgico dovrebbe essere effettuato entro 24 ore dal ricovero. Lunghi tempi d’attesa fanno salire l’indice di rischio. L’immobilizzazione prolungata aumenta la probabilità di embolie polmonari, scompensi cardiaci e infezioni'
-    },
-    '55': {
-        short: 'Aneurisma',
-        title: 'Aneurisma addominale',
-        description: 'l’aneurisma dell’aorta addominale è un cedimento delle pareti dell’arteria aorta, che forma una sacca e può causare un’emorragia. In questo caso si interviene sostituendo il tratto danneggiato con una protesi artificiale'
-    },
-    '63': {
-        short: 'Tumore1',
-        title: 'Tumore al polmone',
-        description: 'è la prima causa di morte per tumore negli uomini e la seconda per le donne. Contrariamente all’immaginario collettivo, il rischio di mortalità è piuttosto basso. La media nazionale si attesta al 2,16%, un valore comunque alto considerando che la comunità internazionale considera accettabile un indice inferiore al 2%'
-    },
-    '82': {
-        short: 'Tumore2',
-        title: 'Tumore gastrico',
-        description: 'Negli ultimi anni il numero di casi diagnosticati nei Paesi occidentali è in diminuzione, un fenomeno che sembra dovuto, almeno in parte, al miglioramento dell\'alimentazione. Nel nostro Paese tuttavia è il tumore con l’indice di rischio più alto: la media nazionale è del 6,05%'
-    },
-    '83': {
-        short: 'Tumore3',
-        title: 'Tumore al colon',
-        description: 'Nei Paesi occidentali il cancro del colon assieme a quello al retto rappresentano il terzo tipo di tumore per incidenza e mortalità. Più frequente a partire dai 60 anni, raggiunge il picco massimo verso gli 80 anni. Negli ultimi anni si è assistito a un aumento del numero di tumori, ma anche a una diminuzione della mortalità'
-    },
-    '84': {
-        short: 'Tumore4',
-        title: 'Tumore al retto',
-        description: 'nasce con un polipo nell’ultima parte del tratto intestinale e a seconda della dimensione può essere maligno. Si cura con un intervento parziale o con la totale asportazione del retto'
-    },
-    '88': {
-        short: 'Infarto4',
-        title: 'Infarto del Miocardio, mortalità dopo 12 mesi',
-        description: 'nei 12 mesi successivi ad un infarto possono presentarsi episodi di reinfarto'
-    }
-};
-
-
-    var esSearchQueryModel = Backbone.Model.extend({
+var esSearchQueryModel = Backbone.Model.extend({
     index: '',
     index_type: '',
     resultsModel: null,
@@ -664,7 +575,7 @@ var esDetailsView = Backbone.View.extend({
     },
 
     initialize: function(options) {
-        _.bindAll(this, "show", "hide", "indicatorClick");
+        _.bindAll(this, "show", "hide", "indicatorClick", "reset");
         this.vent = options.vent;
         this.nationalStats = options.nationalStats;
         this.searchStats = options.searchStats;
@@ -693,10 +604,11 @@ var esDetailsView = Backbone.View.extend({
         $.each(hit._source.indicators.properties, function(index, indicator) {
             var indicatorData = {
                 id: index,
-                disease: diseaseCoding[index].title,
-                description: diseaseCoding[index].description,
+                disease: diseaseInfo[index].title,
+                description: diseaseInfo[index].description,
                 present: false,
                 hospitalized: hit._source.hospitalized.properties[index],
+                nationalMean: diseaseInfo[index].national_mean,
                 nationalIndicator: t.nationalStats['indicator_' + index],
                 nationalHospitalized: t.nationalStats['hospitalized_' + index],
                 currentSearchIndicator: t.searchStats['indicator_' + index],
@@ -721,9 +633,17 @@ var esDetailsView = Backbone.View.extend({
     },
 
     indicatorClick: function(evt) {
+        this.reset();
         evt.preventDefault();
+        $(evt.currentTarget).addClass("selected");
+        $(evt.currentTarget).find('.disease_description').show();
         indicator = $(evt.currentTarget).attr('href');
         this.vent.trigger('calculate:topten', indicator);
+    },
+
+    reset: function() {
+        this.$el.find('.disease_description').hide();
+        this.$el.find('li.indicator').removeClass('selected');
     }
 });
 
@@ -769,7 +689,7 @@ var esTopTenView = Backbone.View.extend({
         } );
 
         this.$el.html(ich.rankingsTemplate({
-            disease: diseaseCoding[indicator].title,
+            disease: diseaseInfo[indicator].title,
             topten: nonNullList.slice(0, 10),
             bottomten: nonNullList.slice(-10).reverse()
         }));
@@ -897,7 +817,7 @@ var basicQuery = {
     }
 };
 
-$.each(diseaseCoding, function(indicator, name) {
+$.each(diseaseInfo, function(indicator, name) {
     indicator_index = 'indicator_' + indicator;
     hospitalized_index = 'hospitalized_' + indicator;
     basicQuery.facets[indicator_index] = {
