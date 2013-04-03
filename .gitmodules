@@ -1,6 +1,3 @@
-[submodule "jslib/fuelux"]
-	path = jslib/fuelux
-	url = git@github.com:ExactTarget/fuelux.git
 [submodule "vendor/elastica"]
 	path = vendor/elastica
 	url = https://github.com/ruflin/Elastica.git
