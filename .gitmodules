@@ -1,6 +1,3 @@
 [submodule "vendor/elastica"]
 	path = vendor/elastica
 	url = https://github.com/ruflin/Elastica.git
-[submodule "jslib/es-backbone"]
-	path = jslib/es-backbone
-	url = http://github.com/Automattic/es-backbone.git
