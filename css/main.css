@@ -120,7 +120,7 @@ b, strong, th {font-weight: bold;}
 #loader {position: absolute; top: 0; left: 0; z-index: 9999; width: 100%; height: 100%; background-color: #feffff; opacity: 0.8; filter: alpha(opacity=80);}
 
 
-.searchbar {position: absolute; top: 0px; z-index:999; width: 100%; padding: 10px; background: rgba(188,222,208,0.8); overflow: hidden;
+.searchbar {position: absolute; top: 0px; z-index:999; width: 100%; padding: 10px; background: #add6ca; overflow: hidden;
     text-align: center;
 }
 .searchbar .search {display: block; width: 100%; margin: 0;}
@@ -128,10 +128,12 @@ b, strong, th {font-weight: bold;}
 #details {height: 100%; min-height: 100%; /*height: auto!important; */color: #58595b; overflow: auto;}
 #details h3 {margin: 0.4em 0; font-size: 2.3em; font-weight: normal; font-style: normal; line-height: 1em; }
 #details div.struttura,
-#details div.dimensione {display: block; height: 92px; float: left; padding: 6px; margin: 7px 0 0; background-color: #df5b38; overflow: hidden;}
-#details div.dimensione {width: 31%;	margin: 7px 0 0 7px;}
+#details div.dimensione {display: block; height: 92px; float: left; padding: 6px; margin: 0; background-color: #df5b38; overflow: hidden;}
+#details div.dimensione {width: 31%;	margin: 0 0 0 7px;}
 #details .close { display: none; }
-#details div.struttura {width: 60%; margin: 7px 0 0;}
+#details div.struttura {width: 60%;
+    margin: 0;
+}
 #details div.struttura span,
 #details div.dimensione span {font-size: 1.4em; text-transform: uppercase;}
 
@@ -146,7 +148,12 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 
 
 #details .header,
-#details ul.indicators li {display: block; padding: 8px; background: rgba(188,222,208,0.8);	border: 3px solid #bcded0; overflow: hidden;}
+#details ul.indicators li {display: block; padding: 8px;	border: 3px solid #add6ca; overflow: hidden;}
+
+#details div.header {
+    padding: 0 0 5px;
+    border-style: none;
+}
 
 #details ul.indicators {
     margin: 0;
@@ -157,10 +164,11 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 #details ul.indicators li {
     list-style: none;
     margin-top: 10px;
+    background-color: #add6ca;
 }
 
 #details ul.indicators li:hover {
-    background: rgba(188,222,208,0.8);
+    background: #add6ca;
     cursor: pointer;
     border: 3px solid #df5b38;
 }
@@ -232,7 +240,7 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
     display: block;
     position: absolute;
     z-index:8001;
-    background: rgba(188,222,208,0.8);
+    background: #add6ca;
     bottom: 0;
     right: 0px;
     padding: 10px;
@@ -463,8 +471,12 @@ and (min-width : 320px) and (max-width : 480px) {
     }
     #details {width: 100%;}
     #details p, #details h3, #details h4 {margin: 0;}
-    #details div.header {position: fixed; width: 98%!important; height: 80px; padding: 0; margin: 0; overflow: hidden;
+    #details div.header {position: fixed; width: 98%!important; height: 80px; margin: 0; overflow: hidden;
         z-index: 2;
+        background-color: #add6ca;
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
     }
     #details div.struttura { width: 60%; height: 100%; }
     #details div.dimensione { width: 25%; height: 100%; }
@@ -489,7 +501,6 @@ and (min-width : 320px) and (max-width : 480px) {
         padding-top: 12px;
         width: 100%;
         margin-top: 0;
-        background: rgba(188,222,208,0.8);
     }
 
     #rankings .close, #details .close {
