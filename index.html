@@ -9,30 +9,26 @@
     <meta name="author" content="Mitecube / Wired.it">
 
     <!-- Styles -->
-    <!--<script src="jslib/OpenLayers-2.12/OpenLayers.js"></script>-->
 
     <script src="http://openlayers.org/api/OpenLayers.js"></script>
     <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
     <script src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href="http://fonts.googleapis.com/css?family=Titillium+Web" />
 
-    <style>
-        body {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-        }
-    </style>
-    <!--
     <link href="jslib/fuelux/css/fuelux.css" rel="stylesheet">
     <link href="jslib/fuelux/css/fuelux-responsive.css" rel="stylesheet">
-    -->
-    <link type="text/css" rel="stylesheet" href="/min/?b=jslib/fuelux/css&amp;f=fuelux.css,fuelux-responsive.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="http://fonts.googleapis.com/css?family=Titillium+Web" />
 
-    <!--
+<!--
+    <link type="text/css" rel="stylesheet" href="/min/?b=jslib/fuelux/css&amp;f=fuelux.css,fuelux-responsive.css" />
+-->
+
+    <link href="css/cssReset.css" rel="stylesheet">
     <link href="css/spinner.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 
-    -->
-    <link type="text/css" rel="stylesheet" href="/min/?b=css&amp;f=spinner.css,main.css" />
+<!--
+    <link type="text/css" rel="stylesheet" href="/min/?b=css&amp;f=cssReset.css,spinner.css,main.css" />
+-->
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
@@ -47,107 +43,230 @@
 </head>
 
 <body>
-    <script type="text/html" id="detailsTemplate">
-        <div id="details">
-            <a href="javascript:void(null)" class="close"><i class="icon-remove icon-white"></i></a>
-            <div class="header">
+
+<script type="text/html" id="detailsTemplate">
+    <div id="details">
+        <a href="javascript:void(null)" class="close"><i class="icon-remove icon-white"></i></a>
+        <div class="header">
+            <div class="struttura">
+                <span>struttura</span>
                 <h3>{{name}}</h3>
-                <p>{{address}}</p>
                 <p>{{city}} ({{province}})</p>
             </div>
-            <div class="body">
-                <ul class="indicators">
-                    {{#indicators}}
-                    <li class="indicator" href="{{id}}">
-                        {{#present}}
-                        <h4>{{disease}}</h4>
-                        <div class="progress">
-                            <div class="bar bar-danger" style="width: {{deaths}}%;"></div>
-                            <div class="bar bar-success" style="width: {{survivors}}%;"></div>
-                        </div>
-                        {{nationalMean}}%
-                        {{/present}}
-                        {{^present}}
-                            <h4 class="disabled">{{disease}}</h4>
-                        {{/present}}
-                        <p class="disease_description" style="display:none">{{description}}</p>
-                    </li>
-                    {{/indicators}}
-                </ul>
+
+            <div class="dimensione">
+                <span>dimensione</span>
+                <h3>{{size}}</h3>
             </div>
-
         </div>
-    </script>
-
-    <script type="text/html" id="rankingsTemplate">
-        <div id="rankings">
-            <a href="javascript:void(null)" class="close pull-right"><i class="icon-remove icon-white"></i></a>
-            <h4>{{disease}}</h4>
-            <ul class="topten pull-left">
-                <li class="label">I migliori</li>
-                {{#topten}}
-                <li class="hospital" href="{{id}}">
-                    <span class="badge badge-success">{{score}}%</span>
-                    <span class="name">{{name}}</span>
+        <div class="body">
+            <ul class="indicators">
+                {{#indicators}}
+                <li class="indicator" href="{{id}}">
+                    {{#present}}
+                    <h4>{{disease}}</h4>
+                    <div class="progress">
+                        <span class="deaths"><i>decessi</i>{{deaths}}%</span>
+                        <span class="hospitalized"><i>ricoverati</i>{{hospitalized}}</span>
+                        <div class="bar bar-danger" style="width: {{deaths}}%;"></div>
+                        <div class="bar bar-success" style="width: {{survivors}}%;"></div>
+                        <div class="bar national-mean" style="width: {{nationalMean}}%;"></div>
+                    </div>
+                    <span class="national-mean" style="left: {{nationalMean}}%;"><i class="arrow">↑</i>media nazionale {{nationalMean}}%</span>
+                    {{/present}}
+                    {{^present}}
+                    <h4 class="disabled">{{disease}}</h4>
+                    {{/present}}
+                    <p class="disease_description" style="display:none">{{description}}</p>
                 </li>
-                {{/topten}}
-            </ul>
-            <ul class="bottomten pull-right">
-                <li class="label">I peggiori</li>
-                {{#bottomten}}
-                <li class="hospital" href="{{id}}">
-                    <span class="badge badge-important">{{score}}%</span>
-                    <span class="name">{{name}}</span>
-                </li>
-                {{/bottomten}}
+                {{/indicators}}
             </ul>
         </div>
-    </script>
 
-    <script type="text/html" id="appTemplate">
-        <div id="{{prefix}}-search-bar" class="searchbar">
-            <div id="searchbox" class="input-append search">
-                <input type="text" class="searchquery span3" placeholder="Cerca ospedale o località...">
-                <button class="searchbutton btn"><i class="icon-search"></i></button>
+    </div>
+</script>
+
+<script type="text/html" id="rankingsTemplate">
+    <div id="rankings">
+        <a href="javascript:void(null)" class="close pull-right"><i class="icon-remove icon-white"></i></a>
+        <h4>{{disease}}</h4>
+        <ul class="topten pull-left">
+            <li class="label">I migliori</li>
+            {{#topten}}
+            <li class="hospital" href="{{id}}">
+                <span class="badge badge-success">{{score}}%</span>
+                <span class="name">{{name}}</span>
+            </li>
+            {{/topten}}
+        </ul>
+        <ul class="bottomten pull-right">
+            <li class="label">I peggiori</li>
+            {{#bottomten}}
+            <li class="hospital" href="{{id}}">
+                <span class="badge badge-important">{{score}}%</span>
+                <span class="name">{{name}}</span>
+            </li>
+            {{/bottomten}}
+        </ul>
+    </div>
+</script>
+
+<script type="text/html" id="appTemplate">
+    <div id="{{prefix}}-search-bar" class="searchbar">
+        <div id="searchbox" class="input-append search">
+            <input type="text" class="searchquery span6" placeholder="Cerca ospedale o località...">
+            <button class="searchbutton btn"><i class="icon-search"></i></button>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="{{prefix}}-details" style="display: none"></div>
+
+    <div id="{{prefix}}-rankings"></div>
+
+    <div id="loader">
+        <div id="floatingBarsG">
+            <div class="blockG" id="rotateG_01">
+            </div>
+            <div class="blockG" id="rotateG_02">
+            </div>
+            <div class="blockG" id="rotateG_03">
+            </div>
+            <div class="blockG" id="rotateG_04">
+            </div>
+            <div class="blockG" id="rotateG_05">
+            </div>
+            <div class="blockG" id="rotateG_06">
+            </div>
+            <div class="blockG" id="rotateG_07">
+            </div>
+            <div class="blockG" id="rotateG_08">
             </div>
         </div>
+    </div>
 
-        <div id="map"></div>
+</script>
 
-        <div id="{{prefix}}-details"></div>
+<!-- START WRAPPER -->
+<div id="wrapper">
 
-        <div id="{{prefix}}-rankings"></div>
+    <!-- START HEADER -->
+    <header class="headerPlus">
+        <!-- >titolo -->
+        <hgroup>
+            <h1><a href="#" title="Dove ti Curi">Dove ti Curi</a></h1>
+            <span>Scopri i migliori ospedali d'Italia</span>
 
-        <div id="loader">
-            <div id="floatingBarsG">
-                <div class="blockG" id="rotateG_01">
-                </div>
-                <div class="blockG" id="rotateG_02">
-                </div>
-                <div class="blockG" id="rotateG_03">
-                </div>
-                <div class="blockG" id="rotateG_04">
-                </div>
-                <div class="blockG" id="rotateG_05">
-                </div>
-                <div class="blockG" id="rotateG_06">
-                </div>
-                <div class="blockG" id="rotateG_07">
-                </div>
-                <div class="blockG" id="rotateG_08">
-                </div>
-            </div>
-        </div>
+            <!-- >logo -->
+            <a href="#" title="Dove ti Curi" class="logo">Dove ti Curi</a>
+            <!-- /logo -->
 
-    </script>
+        </hgroup>
 
-    <div id="app-es-map"></div>
+        <!-- /titolo -->
+
+        <!-- >nav -->
+        <nav>
+            <ul>
+                <li>
+                    <h3>
+                        <a href="#" title="news">news</a>
+                    </h3>
+                </li>
+
+                <li>
+                    <h3>
+                        <a href="#" title="about">about</a>
+                    </h3>
+                </li>
+
+                <!-- <li>
+                    <h3 class="twitter">
+                        <a href="javascript:void(0);" title="twitter">twitter
+                            <span class="icon"> </span>
+                        </a>
+                    </h3>
+                </li>
+
+                <li>
+                    <h3 class="facebook">
+                        <a href="javascript:void(0);" title="facebook">twitter
+                            <span class="icon"> </span>
+                        </a>
+                    </h3>
+                </li> -->
+            </ul>
+        </nav>
+        <!-- >nav -->
+    </header>
+    <!-- END HEADER -->
+
+    <!-- START CONTENT -->
+    <section class="content">
+
+        <!-- >main -->
+        <section class="main">
+
+            <div id="app-es-map"></div>
+
+        </section>
+        <!-- /main -->
+
+        <div class="clear"> </div>
+    </section>
+    <!-- END CONTENT -->
+
+    <!-- START FOOTER -->
+    <section class="wpFooter">
+
+        <footer>
+            <!-- >social -->
+            <ul class="social">
+                <li>
+                    <a href="https://twitter.com/wireditalia" target="_blank" title="twitter" class="twitter">twitter
+                        <span class="icon"> </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.facebook.com/wireditalia" target="_blank" title="facebook" class="facebook">facebook
+                        <span class="icon"> </span>
+                    </a>
+                </li>
+
+                <li>
+                    <p>Fonte dati: Agenas - Ministero della Salute</p>
+                </li>
+            </ul>
+            <!-- /social -->
+
+            <!-- >partner -->
+            <ul class="partner">
+                <li>
+                    <a href="http://www.mitecube.com" target="_blank" title="mitecube" class="logoMitecube">mitecube</a>
+                </li>
+
+                <li>
+                    <a href="http://www.wired.it" target="_blank"  title="wired.it" class="logoWired">Wired</a>
+                </li>
+            </ul>
+            <!-- /partner -->
+        </footer>
+
+    </section>
+    <!-- END FOOTER -->
+
+
+    <div class="clear"></div>
+</div>
+<!-- END WRAPPER -->
 
 
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<!--
+
 <script src="jslib/jquery-1.9.1.min.js"></script>
 <script src="jslib/fuelux/loader.min.js"></script>
 <script src="jslib/bootbox.min.js"></script>
@@ -156,16 +275,17 @@
 <script src="jslib/backbone/underscore-min.js"></script>
 <script src="jslib/backbone/backbone-min.js"></script>
 <script src="jslib/protovis/protovis.min.js"></script>
--->
-
-<script type="text/javascript" src="min/?b=jslib&amp;f=jquery-1.9.1.min.js,fuelux/loader.min.js,bootbox.min.js,json2.js,ICanHaz.min.js,backbone/underscore-min.js,backbone/backbone-min.js,protovis/protovis.min.js"></script>
 
 <!--
+<script type="text/javascript" src="min/?b=jslib&amp;f=jquery-1.9.1.min.js,fuelux/loader.min.js,bootbox.min.js,json2.js,ICanHaz.min.js,backbone/underscore-min.js,backbone/backbone-min.js,protovis/protovis.min.js"></script>
+-->
+
 <script src="js/text.js"></script>
 <script src="js/config.js"></script>
 <script src="js/app.js"></script>
--->
-<script type="text/javascript" src="min/?b=js&amp;f=text.js,config.js,app.js"></script>
 
+<!--
+<script type="text/javascript" src="min/?b=js&amp;f=text.js,config.js,app.js"></script>
+-->
 </body>
 </html>

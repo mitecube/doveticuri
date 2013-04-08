@@ -1,164 +1,274 @@
 /* @override http://33.33.33.101/css/main.css */
 
-body {
-	font-family: "Titillium Web"!important;
+
+
+
+
+/*
+	Author: Giuliano Salvatore
+	web: http://www.giulianosalvatore.com
+	twitter: @salvogiuliano 
+*/
+
+
+/* ==================================================
+   	START CSS SUPERBOOK | Author: Salvatore Giuliano
+   ==================================================*/
+
+
+
+
+/* | GENERALE |
+===================================================== */
+
+@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/7XUFZ5tgS-tD6QamInJTcZ_o9VAbKgK36i-4snuAuCM.woff) format('woff');
 }
 
-html, body {
-    margin  : 0;
-    padding : 0;
-    height  : 100%;
-    width   : 100%;
-}
-@media only screen and (max-width: 767px) {
-    html, body {
-        padding: 0!important;
-    }
-}
 
-#app-es-map {
-    width    : 100%;
-    position : relative;
-    height   : 100%;
-}
 
-#loader {
-    width    : 100%;
-    position : absolute;
-    height   : 100%;
-    z-index: 9999;
-	background-color: #feffff;
-	display: block;
-	top: 0;
-	left: 0;
-	opacity: 0.8;
-}
 
-.searchbar {
-	top:  0px;
-	right: 0px;
-	display: block;
-	position: absolute;	
-	z-index:1000;
-	background: rgba(40,40,40,0.8);
-	padding: 10px;
-}
+body {background-color: #f0e7d5;
+    color: #2b2a30; font-size: 62.5%; font-family: 'Titillium Web', Helvetica, Arial, sans-serif!important;}
 
-#searchbox {
-	width: 100%;
-}
 
-#details {
-	width: 230px;
-	display: block;
-	position: absolute;
-	z-index:8000;
-	background: rgba(40,40,40,0.8);
-	top: 0;
-	padding: 0;
-	color: #d5d5d5;
-	overflow: auto;
-    height: 100%;
-    min-height: 100%;
-	
-}
+.hidden {display: none; visibility: hidden;}
+.visuallyhidden {border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px;}
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto;}
+.invisible {visibility: hidden;}
 
-div.olControlZoom {
-    right: 10px;
-    top: 100px!important;
-    left: auto!important;
-    padding: 3px;
-}
+.ir {display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0;}
+.ir br {display: none;}
 
-.olControlAttribution {
-    position      : absolute;
-    font-size     : 10px;
-    bottom        : 0 !important;
-    right         : 0 !important;
-    background    : rgba(0,0,0,0.1);
-    font-family   : Arial;
-    padding       : 2px 4px;
-    border-radius : 5px 0 0 0;
-}
+.left {float: left;}
+.right {float: right;}
 
-div.olControlZoom a {
-    background: #797979!important;
-    background: rgba(121, 121, 121, 0.5);
-}
+.clear:before, .clear:after {content: ""; display: table;}
+.clear:after {clear: both;}
+.clear {*zoom: 1;}
 
-#details .header, 
-#details ul.indicators li {
-	background-color: #797979;
-	padding-right: 5px;
-	padding-left: 5px;
-	overflow: hidden;
-	margin-top: 10px;
-	border: 3px solid #797979;
-	margin-right: 10px;
-	margin-left: 10px;
-	display: block;
+input[type="button"],
+input[type="submit"],
+input[type="image"] {cursor: pointer;}
+::-webkit-input-placeholder {font-style: italic; color: #ccc;}
+::-moz-placeholder {font-style: italic; color: #ccc;}
+
+/* link */
+a {text-decoration: none;}
+
+
+/* testo */
+h1, h2, h3, h4, h5, h6 {font-weight: bold;}
+h1 {}
+h2 {}
+h3 {}
+h5 {}
+h6 {}
+b, strong, th {font-weight: bold;}
+
+/* icone */
+.icon {position: absolute; top: 50%; left: 50%; background-image: url(../images/sprite.png); background-repeat: no-repeat;}
+
+/* wrapper */
+#wrapper {width: 100%;}
+
+
+/* | HEADER |
+===================================================== */
+.headerPlus {position: fixed; top: 0; left: 0; width: 100%; padding: 10px 0; background-color: #bcded0; overflow: hidden; z-index: 1}
+.headerPlus hgroup {position: relative; height: 80px; float: left; padding: 0 0 0 10em;
+    margin: 0;
 }
+.headerPlus h1 {padding: 0.5em 0 0; margin: 0; color: #58595b; font: normal 3.2em/1 'Titillium Web', Helvetica, Arial, sans-serif; text-transform: uppercase;}
+.headerPlus h1 a {color: #58595b;
+    transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease;	-ms-transition: all 0.5s ease;}
+.headerPlus hgroup span {color: #58595b; font: italic 1.4em/normal 'Titillium Web', Helvetica, Arial, sans-serif; text-transform: uppercase;}
+.headerPlus h1 a:hover {color: #df5b38;}
+
+.logo {position: absolute; top: 50%; left: 1em; width: 74px; height: 74px; margin: -37px 0 0;
+    background-image: url(../images/sprite.png); background-repeat: no-repeat; background-position: 0 0; text-indent: -9999px;}
+.headerPlus a:hover {text-decoration: none;}
+/* | nav | */
+.headerPlus nav {float: right;}
+.headerPlus nav ul {height: 80px; margin: 0;}
+.headerPlus nav ul li {display: inline; float: left;}
+.headerPlus nav h3 {padding: 0 1em; margin: 0; color: #58595b; font: normal 2em/80px 'Titillium Web', Helvetica, Arial, sans-serif;}
+.headerPlus nav h3 a {display: block; position: relative; color: #58595b;
+    transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease;	-ms-transition: all 0.5s ease;
+}
+.headerPlus nav h3 a:hover {color: #FFF;}
+.headerPlus nav .twitter,
+.headerPlus nav .facebook {text-indent: -9999px;}
+.headerPlus nav .twitter .icon {width: 33px; height: 27px; margin: -14px 0 0 -16px; background-position: -110px -6px;}
+.headerPlus nav .facebook .icon {width: 15px; height: 31px; margin: -14px 0 0 -7px; background-position: -119px -46px;}
+
+
+/* | CONTENT |
+===================================================== */
+.content {position: absolute; top: 100px; bottom: 44px; left: 0; width: 100%;}
+.main {position : absolute; z-index  : 0; width: 100%; height: 100%; overflow: hidden;}
+.main p {font-size: 1.3em;}
+
+.fuelux .close {opacity: 0.5; filter: alpha(opacity=40);}
+.fuelux .close:hover {opacity: 0.8; filter: alpha(opacity=80);}
+.fuelux .icon-remove {background-image: url(../images/sprite.png); background-repeat: no-repeat; background-position: -9px -177px;}
+
+#app-es-map {position : relative; width: 100%; height: 100%;}
+#loader {position: absolute; top: 0; left: 0; z-index: 9999; width: 100%; height: 100%; background-color: #feffff; opacity: 0.8; filter: alpha(opacity=80);}
+
+
+.searchbar {position: absolute; top: 0px; z-index:999; width: 100%; padding: 10px; background: rgba(188,222,208,0.8); overflow: hidden;
+    text-align: center;
+}
+.searchbar .search {display: block; width: 100%; margin: 0;}
+#es-map-details {position: absolute; position: absolute; top: 50px; bottom: 0; z-index:8000; width: 400px; overflow: hidden;}
+#details {height: 100%; min-height: 100%; /*height: auto!important; */color: #58595b; overflow: auto;}
+#details h3 {margin: 0.4em 0; font-size: 2.3em; font-weight: normal; font-style: normal; line-height: 1em; }
+#details div.struttura,
+#details div.dimensione {display: block; height: 92px; float: left; padding: 6px; margin: 7px 0 0; background-color: #df5b38; overflow: hidden;}
+#details div.dimensione {width: 31%;	margin: 7px 0 0 7px;}
+#details .close { display: none; }
+#details div.struttura {width: 60%; margin: 7px 0 0;}
+#details div.struttura span,
+#details div.dimensione span {font-size: 1.4em; text-transform: uppercase;}
+
+#details .header {color: #feffff;}
+
+.olControlZoom {top: 200px!important; right: 10px; left: auto!important; padding: 3px;}
+
+.olControlAttribution {position: absolute; bottom: 0 !important; right: 0 !important; padding: 2px 4px; background: rgba(0,0,0,0.1);
+    font-size: 10px; font-family: Arial; border-radius : 5px 0 0 0;}
+
+div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121, 121, 0.5);*/}
+
+
+#details .header,
+#details ul.indicators li {display: block; padding: 8px; background: rgba(188,222,208,0.8);	border: 3px solid #bcded0; overflow: hidden;}
 
 #details ul.indicators {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
+    color: #58595b;
 }
 
 #details ul.indicators li {
-	list-style: none;
-	margin-top: 10px;
+    list-style: none;
+    margin-top: 10px;
 }
 
 #details ul.indicators li:hover {
-	border-color: #0096ff;
-	cursor: pointer;
+    background: rgba(188,222,208,0.8);
+    cursor: pointer;
+    border: 3px solid #df5b38;
 }
 
-#details ul.indicators li h4 {
-	font-size: 14px;
+#details ul.indicators li h4 {font-size: 1.6em;}
+
+#details ul.indicators li h4.disabled {color: #7b9097; font-weight: normal;	font-style: normal;}
+
+#details div.progress {position: relative; height: 50px; color: #212121;}
+
+#details div.progress span.deaths {position: absolute; z-index: 1; height: 50px; padding-left: 8px; margin: auto; font-size: 20px;	line-height: 37px;}
+
+
+#details div.progress i {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    display: block;
+    line-height: 0;
+    margin-top: 14px;
 }
 
-#details ul.indicators li h4.disabled {
-	color: #919191;
+#details div.progress span.hospitalized {
+    position: absolute;
+    height: 50px;
+    margin: auto;
+    font-size: 20px;
+    line-height: 37px;
+    text-align: right;
+    right: 8px;
+    z-index: 1;
+}
+
+#details div.progress .bar-danger {
+    background-color: #df5b38;
+    background-image: none;
+}
+
+
+#details div.progress .bar-success {
+    background-color: #d1fbe5;
+    background-image: none;
+}
+
+#details div.progress .national-mean {
+    position: absolute;
+    height: 50px;
+    border-right: 5px solid #989898;
+    background-image: none;
+    background-color: transparent;
+
+}
+
+#details span.national-mean {
+    position: relative;
+    top: -19px;
+    font-size: 14px;
+    margin-left: -5px;
+}
+
+#details span.national-mean i.arrow {
+    font-size: 15px;
+    margin-right: 4px;
 }
 
 #rankings {
-	width: 430px;
-	display: block;
-	position: absolute;
-	z-index:8001;
-	background: rgba(40,40,40,0.8);
-	bottom: 0;
-	right: 0px;
-	padding: 10px;
-	color: #d5d5d5;
+    width: 430px;
+    display: block;
+    position: absolute;
+    z-index:8001;
+    background: rgba(188,222,208,0.8);
+    bottom: 0;
+    right: 0px;
+    padding: 10px;
+    color: #58595b;
 }
 
 #rankings ul {
-	margin-left: 0px!important;
+    margin-left: 0px!important;
 }
 
 .close {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 #details a.close {
-	position: absolute;
-	right: 15px;
-	top: 6px;
+    position: absolute;
+    right: 15px;
+    top: 6px;
 }
 
 #rankings ul li.label {
-	list-style: none;
-	padding: 3px;
-	background: none!important;
-	margin-bottom: 5px;
-	margin-top: 5px;
+    color: #58595b;
+    list-style: none;
+    padding: 3px;
+    background: none!important;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-weight: normal;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: 1.2em;
 }
 
 #rankings ul li.hospital {
-	list-style: none;
-	padding: 3px;
+    list-style: none;
+    padding: 3px;
 }
 /*
 #rankings ul li.hospital:hover {
@@ -166,31 +276,17 @@ div.olControlZoom a {
 	cursor: pointer;
 }*/
 
-#rankings ul li.hospital span.name {
-	width: 133px;
-	overflow: hidden;		
-	display: inline-block;
-	white-space: nowrap;
-	vertical-align: baseline;
-}
+#rankings ul li.hospital span.name {width: 133px; overflow: hidden;	display: inline-block; white-space: nowrap;	vertical-align: baseline; font-size: 1.1em;}
+#rankings ul li.hospital span.badge {width: 44px; background:none; color: #df5b38; font-size: 1.2em; text-align: center;}
 
-#rankings ul li.hospital span.badge {
-	width: 44px;
-	text-align: center;
-}
-
-#rankings h4 {
-	margin-bottom: 10px;
-	border-bottom: 1px solid #919191;
-	padding-bottom: 10px;
-}
+#rankings h4 {margin-bottom: 10px; padding-bottom: 10px;}
 
 #rankings ul.topten li.hospital span.score {
-	color: #5fbe5f;
+    color: #58595b;
 }
 
 #rankings ul.bottomten li.hospital span.score {
-	color: #da524d;
+    color: #da524d;
 }
 
 #map {
@@ -203,7 +299,7 @@ div.olControlZoom a {
 .fill {
     min-height: 100%;
     height: 100%;
-	margin-top: -14px;
+    margin-top: -14px;
 }
 
 #map img { max-width:none; }
@@ -215,195 +311,219 @@ div.olControlZoom a {
 /* @group Polar Chart */
 
 #disease_details {
-	z-index: 2;
-	display: block;
-	position: relative;
-	top: -479px;
-	width: 181px;
-	left: 311px;
-	text-align: center;
+    z-index: 2;
+    display: block;
+    position: relative;
+    top: -479px;
+    width: 181px;
+    left: 311px;
+    text-align: center;
 }
 
 
 #disease_legend {
-	z-index:9999;
-	padding: 10px;
-	position: absolute;
-	display: block;
-	width: 300px;
-	top: 192px;
-	right: 37px;
-	background: rgba(88, 82, 84,0.8);
+    z-index:9999;
+    padding: 10px;
+    position: absolute;
+    display: block;
+    width: 300px;
+    top: 192px;
+    right: 37px;
+    background: rgba(88, 82, 84,0.8);
 }
 
 .disease {
-	color: #feffff;
-	display: block;
+    color: #feffff;
+    display: block;
 }
 
 .disease.title {
-	font-size: 18px;
-	margin-bottom: 7px;
+    font-size: 18px;
+    margin-bottom: 7px;
 }
 
 .disease.description {
-	font-style: italic;
+    font-style: italic;
 }
 
 #disease_details ul {
-	text-align: left;
-	margin-left: 0;
-	padding: 0 10px 2px;
+    text-align: left;
+    margin-left: 0;
+    padding: 0 10px 2px;
 }
 
 li.disease li {
-   padding-left: 1em; 
+    padding-left: 1em;
     text-indent: -.7em;
 }
 li.disease:before {
     content: "•";
-	font-size: 27px;
+    font-size: 27px;
 }
 
 li.disease.hospitalized:before {
-	color:  rgba(200, 200, 200, 0.5000);
+    color:  rgba(200, 200, 200, 0.5000);
 }
 
 li.disease.deaths:before {
-	color:  rgba(251, 20, 16, 1.0000);
+    color:  rgba(251, 20, 16, 1.0000);
 }
 
 li.disease.national_deaths:before {
-	color:  rgba(248, 163, 164, 1.0000);
+    color:  rgba(248, 163, 164, 1.0000);
 }
 /* @end */
 
 
 
+
+
+/* | FOOTER |
+===================================================== */
+.wpFooter {position: fixed; left: 0; bottom: 0; width: 100%; background-color: #acd6ca;}
+.wpFooter footer {position: relative; height: 44px; padding: 0 1.5em;}
+
+.wpFooter .social {height: 44px; float: left; margin: 0;
+}
+.wpFooter .social li {display: inline; float: left; margin: 0;}
+.wpFooter .social li a {display: block; position: relative; height: 44px; padding: 0 1em; text-indent: -9999px; margin-right: 30px}
+.wpFooter .social .facebook .icon {width: 14px; height: 24px; margin: -12px 0 0 -7px; background-position: -54px -134px;
+    transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease;	-ms-transition: all 0.5s ease;
+}
+.wpFooter .social .facebook:hover .icon {background-position: -54px -96px;}
+.wpFooter .social .twitter .icon {width: 34px; height: 22px; margin: -11px 0 0 -17px; background-position: -6px -136px;
+    transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease;	-ms-transition: all 0.5s ease;
+}
+.wpFooter .social .twitter:hover .icon {background-position: -6px -98px;}
+.wpFooter .social p {
+    line-height: 44px;
+    font-size: 14px;
+    width: 100%;
+    margin-left: 60px;
+    color: #4b4b4b;
+}
+
+ul.partner {height: 44px; float: right; margin: 0;}
+ul.partner li {display: inline; position: relative; float: left; margin: 0 0 0 3em;}
+ul.partner li a {display: block; height: 44px; text-indent: -9999px;}
+ul.partner .logoWired {width: 145px; background: transparent url(../images/logo_wired.png) no-repeat center center;}
+ul.partner .logoMitecube {width: 123px; background: transparent url(../images/logo_mitecube.png) no-repeat center center;}
+
+
+
+
+
+
+
+
 /* @group Responsive */
 
-@media only screen and (max-width: 480px) {
+@media only screen
+and (min-width : 320px) and (max-width : 480px) {
+    .logo {left: 0.6em; width: 44px; height: 44px; margin: -22px 0 0; background-position: -100px -96px;}
+    .headerPlus {padding: 0 0 10px;}
+    .headerPlus h1 {padding: 5px 0 0; font-size: 2em;}
+    .headerPlus hgroup span {font-size: 1.1em;}
+    .headerPlus {position: absolute; top: 0; left: 0; z-index: 9000; width: 100%; padding: 5px 0;}
+    .headerPlus hgroup {position: relative; height: 44px; padding: 0 0 0 5em;}
 
-	div.olControlZoom {
-	    top: 70px!important;
-	}
-	
-	.searchbar {
-		width: 100%;
-		margin: 0;
-		padding: 0;
-	}	
-	
-	.searchbar .search {
-		margin-left: 5px;
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
-	
-	.searchbar .span3 {
-		width: 85%!important
-	}
-	
-	#details {
-		width: 100%;
-	}	
-		
-	#details p, #details h3, #details h4 {
-		margin: 0;
-	}
+    .headerPlus nav {display: none;}
 
-	#details div.header {
-		position: fixed;
-		width: 98%!important;
-		height: 80px;
-		overflow: hidden;
-		margin-top: 0;
-		padding-top: 10px;
-		padding-bottom: 3px;
-		padding-right: 0;
-		margin-left: 0;
-		padding: 0;
-		margin: 0;
-	}
-	
-	#details div.header h3 {
-		white-space: nowrap;
-		overflow: hidden;
-		width: 300px;
-	}
-	
-	#details ul.indicators {
-		margin-top: 87px;
-	}
-	
-	#details ul.indicators li {
-		height: 25px;
-		margin-top: 1px;
-		margin-right: 0!important;
-		padding-left: 0;
-		margin-left: 0;
-	}	
-		
-	#details h4	{
-		width: 67%;
-		overflow: hidden;
-		white-space: nowrap;
-		float: left;
-	}
-		
-	#details div.progress {
-		width: 30%;
-		float: right;
-	}
-	
-    #rankings {
+    .content {position: absolute; top: 54px; bottom: 44px; width: 100%;}
+
+    .wpFooter {position: absolute;}
+    .wpFooter .social {display: none;}
+    ul.partner {float: none;}
+    ul.partner li {float: right; margin: 0;}
+    ul.partner li:first-child {float: left;}
+
+
+    div.olControlZoom {
+        top: 70px!important;
+    }
+
+    .searchbar {
         width: 100%;
-		margin: 0;
-		padding: 0;
-		height: 100%;
-		overflow: scroll;
-	}
-	
-	#rankings h4 {
-		position: fixed;
-		height: 27px;
-		overflow: hidden;
-		padding-top: 12px;
-		background: rgba(40,40,40,0.8);
-		width: 383px;
-		margin-top: 0;
-	}	
-	
-	#rankings .close, #details .close {		
-		opacity: 1.0!important;
-		margin-right: 10px!important;
-		margin-top: 15px!important;
-		position: fixed!important;
-		top: 0px!important;
-		z-index: 9999;
-		right: 0px!important;
-	}
-	
-	#rankings ul:nth-of-type(1) {
-		margin-top: 50px;
-	}
-		
-	#rankings ul {
-		display:block;
-		float: none;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-	
-	#rankings h4 {
-		padding-left: 10px;
-		padding-right: 10px;
-	}	
-	
-	#rankings ul li.hospital span.name {
-		width: auto;
-		overflow: visible;		
-	}	
+        margin: 0;
+        padding: 0;
+    }
+
+    .searchbar .search {
+        margin-left: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .searchbar .span6 {
+        width: 85%!important
+    }
+    #es-map-details {
+        width: 100%;
+        top: 0;
+    }
+    #details {width: 100%;}
+    #details p, #details h3, #details h4 {margin: 0;}
+    #details div.header {position: fixed; width: 98%!important; height: 80px; padding: 0; margin: 0; overflow: hidden;
+        z-index: 2;
+    }
+    #details div.struttura { width: 60%; height: 100%; }
+    #details div.dimensione { width: 25%; height: 100%; }
+
+    #details div.header h3 {}
+
+    #details ul.indicators { margin-top: 87px; }
+    #details ul.indicators li { margin: 1px 0 0 0;
+        height: 49px;
+    }
+    #details p.disease_description { clear: both; }
+
+    #details h4	{width: 40%; float: left; overflow: hidden; height: 100%; line-height: normal; }
+    #details div.progress span.hospitalized { right: 8px; }
+    #details div.progress {width: 50%; float: right;}
+    #details span.national-mean { display: none; }
+
+    #rankings {width: 100%; height: 100%; margin: 0; padding: 0; overflow: scroll;}
+    #rankings h4 {
+        position: fixed;
+        height: 30px;
+        padding-top: 12px;
+        width: 100%;
+        margin-top: 0;
+        background: rgba(188,222,208,0.8);
+    }
+
+    #rankings .close, #details .close {
+        opacity: 1.0!important;
+        margin-right: 10px!important;
+        margin-top: 60px!important;
+        position: fixed!important;
+        top: 0px!important;
+        z-index: 9999!important;
+        right: 0!important;
+        display: block;
+    }
+
+    #rankings ul:nth-of-type(1) {
+        margin-top: 50px;
+    }
+
+    #rankings ul {
+        display:block;
+        float: none;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #rankings h4 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #rankings ul li.hospital span.name {
+        width: auto;
+        overflow: visible;
+    }
+
 }
 
 /* @end */

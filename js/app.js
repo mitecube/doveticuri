@@ -311,11 +311,11 @@ var esMapView = Backbone.View.extend({
         this.fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
         this.toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
         this.extent         = new OpenLayers
-                                    .Bounds( 6.60, 35.4, 18.6, 47.08 )
-                                    .transform( this.fromProjection,this.toProjection );
+            .Bounds( 6.60, 35.4, 18.6, 47.08 )
+            .transform( this.fromProjection,this.toProjection );
         this.center         = new OpenLayers
-                                .LonLat( this.initialPositionLon,this.initialPositionLat )
-                                .transform( this.fromProjection, this.toProjection);
+            .LonLat( this.initialPositionLon,this.initialPositionLat )
+            .transform( this.fromProjection, this.toProjection);
 
 //        this.defaultLayer = new OpenLayers.Layer.OSM('Simple OSM Map', null, {
 //            transitionEffect: 'resize',
@@ -591,12 +591,14 @@ var esDetailsView = Backbone.View.extend({
 
     show: function(hit) {
         this.$el.empty();
+        this.$el.show();
 
         data = {
             name: hit._source.name,
             address: hit._source.location.address,
             city: hit._source.location.city,
             province: hit._source.location.province,
+            size: hit._source.size,
             indicators: []
         }
 
@@ -630,19 +632,20 @@ var esDetailsView = Backbone.View.extend({
 
     hide: function() {
         this.$el.empty();
+        this.$el.hide();
     },
 
     indicatorClick: function(evt) {
         this.reset();
         evt.preventDefault();
         $(evt.currentTarget).addClass("selected");
-        $(evt.currentTarget).find('.disease_description').show();
+        $(evt.currentTarget).find('.disease_description').slideDown('fast');
         indicator = $(evt.currentTarget).attr('href');
         this.vent.trigger('calculate:topten', indicator);
     },
 
     reset: function() {
-        this.$el.find('.disease_description').hide();
+        this.$el.find('.disease_description').slideUp('fast');
         this.$el.find('li.indicator').removeClass('selected');
     }
 });
@@ -849,5 +852,6 @@ var esMapApp = new esMapAppView( {
 
 
 $(function() {
+    $('#wrapper').height($(window).height());
     esSearchQuery.search();
 })
