@@ -397,7 +397,7 @@ li.disease.national_deaths:before {
 .wpFooter .social {height: 44px; float: left; margin: 0;
 }
 .wpFooter .social li {display: inline; float: left; margin: 0;}
-.wpFooter .social li a {display: block; position: relative; height: 44px; padding: 0 1em; text-indent: -9999px;}
+.wpFooter .social li a {display: block; position: relative; height: 44px; padding: 0 1em; text-indent: -9999px; margin-right: 30px;}
 .wpFooter .social .facebook .icon {width: 14px; height: 24px; margin: -12px 0 0 -7px; background-position: -54px -134px;
     transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease;	-ms-transition: all 0.5s ease;
 }
