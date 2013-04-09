@@ -91,7 +91,9 @@ b, strong, th {font-weight: bold;}
 .headerPlus nav {float: right;}
 .headerPlus nav ul {height: 80px; margin: 0;}
 .headerPlus nav ul li {display: inline; float: left;}
-.headerPlus nav h3 {padding: 0 1em; margin: 0; color: #58595b; font: normal 2em/80px 'Titillium Web', Helvetica, Arial, sans-serif;}
+.headerPlus nav h3 { margin: 0; color: #58595b; font: normal 2em/80px 'Titillium Web', Helvetica, Arial, sans-serif;
+	padding: 0 0.5em;
+}
 .headerPlus nav h3 a {display: block; position: relative; color: #58595b;
     transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease;	-ms-transition: all 0.5s ease;
 }
@@ -117,19 +119,22 @@ b, strong, th {font-weight: bold;}
 
 
 .searchbar {position: absolute; top: 0px; z-index:999; width: 100%; padding: 10px; background: #add6ca; overflow: hidden;
-    text-align: center;    -moz-box-shadow: 0 0 5px #888;
+    text-align: center;    
+    -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px#888;
     box-shadow: 0 0 5px #888;
 }
 .searchbar .search {display: block; width: 100%; margin: 0;}
-#es-map-details {position: absolute; position: absolute; top: 50px; bottom: 0; z-index:8000; width: 400px; overflow: hidden;}
-#details {height: 100%; min-height: 100%; /*height: auto!important; */color: #58595b; overflow: auto;}
-#details h3 {margin: 0.4em 0; font-size: 2.3em; font-weight: normal; font-style: normal; line-height: 1em; }
-#details div.struttura,
-#details div.dimensione {display: block; height: 92px; float: left; padding: 6px; margin: 0; background-color: #df5b38; overflow: hidden;    -moz-box-shadow: 0 0 5px #888;
+#es-map-details {position: absolute; position: absolute; top: 50px; bottom: 0; z-index: 8000; width: 400px; overflow: hidden;     -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px#888;
     box-shadow: 0 0 5px #888;}
-#details div.dimensione {width: 26%;	margin: 0 0 0 7px;
+#details {height: 100%; min-height: 100%; /*height: auto!important; */color: #58595b; overflow: auto;
+	background-color: #f0e7d5;
+}
+#details h3 {margin: 0.4em 0; font-size: 2.3em; font-weight: normal; font-style: normal; line-height: 1em; }
+#details div.struttura,
+#details div.dimensione {display: block; height: 92px; float: left; padding: 6px; margin: 0; background-color: #df5b38; overflow: hidden; }
+#details div.dimensione {width: 28%;	margin: 0;
 	float: right;
 }
 #details .close { display: none; }
@@ -155,6 +160,7 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 #details div.header {
     padding: 0;
     border-style: none;
+
 }
 
 #details ul.indicators {
@@ -165,11 +171,8 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 
 #details ul.indicators li {
     list-style: none;
-    margin-top: 10px;
-    background-color: #add6ca;
-    -moz-box-shadow: 0 0 5px #888;
-    -webkit-box-shadow: 0 0 5px#888;
-    box-shadow: 0 0 5px #888;    
+    margin-top: 5px;
+    background-color: #add6ca;  
 }
 
 #details ul li:hover {
@@ -239,19 +242,15 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 }
 
 #hidden-indicators {
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 #hidden-indicators span {
 	font-size: 1.6em;	
-	width: 100%;
 	display: block;
 	background: #add6ca;
 	padding: 10px;
-	font-weight: bold;
-    -moz-box-shadow: 0 0 5px #888;
-    -webkit-box-shadow: 0 0 5px#888;
-    box-shadow: 0 0 5px #888;   	
+	font-weight: bold;	
 }
 
 #hidden-indicators span i {
@@ -271,18 +270,15 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 
 #hidden-indicators ul.hidden-indicators li {
 	display: block;
-	width: 26%;
+	width: 103px;
 	float: left;
 	height: 100px;
 	min-widthheight: 100px;
 	background-color: #add6ca;
-	margin-right: 5px;
 	padding: 7px;
 	margin-top: 5px;
-    border: 3px solid #add6ca;	
-    -moz-box-shadow: 0 0 5px #888;
-    -webkit-box-shadow: 0 0 5px#888;
-    box-shadow: 0 0 5px #888;       
+	margin-right: 5px;
+	border: 3px solid #add6ca;	
 }
 
 #hidden-indicators ul.hidden-indicators li.selected {
@@ -494,7 +490,6 @@ li.disease.national_deaths:before {
     line-height: 44px;
     font-size: 14px;
     width: 100%;
-    margin-left: 60px;
     color: #4b4b4b;
 }
 
@@ -535,12 +530,14 @@ and (min-width : 320px) and (max-width : 480px) {
 
     div.olControlZoom {
         top: 70px!important;
+        z-index: 888!important;
     }
 
     .searchbar {
         width: 100%;
         margin: 0;
         padding: 0;
+        z-index: 999;
     }
 
     .searchbar .search {
@@ -555,22 +552,25 @@ and (min-width : 320px) and (max-width : 480px) {
     #es-map-details {
         width: 100%;
         top: 0;
+        z-index: 8000!important;
     }
-    #details {width: 100%;}
+    #details {width: 100%;
+	z-index: 8000;
+}
     #details p, #details h3, #details h4 {margin: 0;}
     #details div.header {position: fixed; width: 98%!important; height: 80px; margin: 0; overflow: hidden;
-        z-index: 2;
         background-color: #add6ca;
         padding-top: 0;
         padding-left: 0;
         padding-right: 0;
+        z-index:3;
     }
-    #details div.struttura { width: 60%; height: 100%; }
+    #details div.struttura { width: 64%; height: 100%; }
     #details div.dimensione { width: 25%; height: 100%;
 	float: left;
+	margin-left: 3px;
 }
 
-    #details div.header h3 {}
 
     #details ul.indicators { margin-top: 87px; }
     #details ul.indicators li { margin: 1px 0 0 0;
