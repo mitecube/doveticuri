@@ -119,8 +119,17 @@ b, strong, th {font-weight: bold;}
 .fuelux .icon-remove {background-image: url(../images/sprite.png); background-repeat: no-repeat; background-position: -9px -177px;}
 
 #app-es-map {position : relative; width: 100%; height: 100%;}
-#loader {position: absolute; top: 0; left: 0; z-index: 9999; width: 100%; height: 100%; background-color: #feffff; opacity: 0.8; filter: alpha(opacity=80);}
+#loader {position: absolute; top: 0; left: 0; z-index: 9999; width: 100%; height: 100%; background-color: #feffff; opacity: 0.8; filter: alpha(opacity=80);
+}
 
+#loader img {
+	margin: auto;
+	display: block;
+	width: 200px;
+	top: 30%;
+	position: relative;
+	opacity: 0.5;
+}
 
 .searchbar {position: absolute; top: 0px; z-index:999; width: 100%; padding: 10px; background: #add6ca; overflow: hidden;    
     -moz-box-shadow: 0 0 5px #888;
