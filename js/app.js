@@ -571,11 +571,12 @@ var esDetailsView = Backbone.View.extend({
 
     events : {
         'click li.indicator' : 'indicatorClick',
+        'click div#hidden-indicators span' : 'hiddenIndicatorsToggle',
         'click a.close' : 'hide'
     },
 
     initialize: function(options) {
-        _.bindAll(this, "show", "hide", "indicatorClick", "reset");
+        _.bindAll(this, "show", "hide", "indicatorClick", "hiddenIndicatorsToggle", "reset");
         this.vent = options.vent;
         this.nationalStats = options.nationalStats;
         this.searchStats = options.searchStats;
@@ -635,6 +636,11 @@ var esDetailsView = Backbone.View.extend({
         this.$el.hide();
     },
 
+    hiddenIndicatorsToggle: function() {
+        this.$el.find('div#hidden-indicators span i').toggleClass('icon-chevron-up').toggleClass('icon-chevron-down');
+        this.$el.find('ul.hidden-indicators').slideToggle('fast');
+    },
+
     indicatorClick: function(evt) {
         this.reset();
         evt.preventDefault();
@@ -691,10 +697,18 @@ var esTopTenView = Backbone.View.extend({
             return a.score < b.score ? -1 : 1;
         } );
 
+        var queryString = '';
+        if (typeof(this.model.attributes.query.filtered.query.query_string) != 'undefined') {
+            queryString = 'Stai visualizzando i risultati relativi alla ricerca ' +
+                '\'' + this.model.attributes.query.filtered.query.query_string.query + '\'';
+        }
+
         this.$el.html(ich.rankingsTemplate({
             disease: diseaseInfo[indicator].title,
-            topten: nonNullList.slice(0, 10),
-            bottomten: nonNullList.slice(-10).reverse()
+            nationalMean: diseaseInfo[indicator].national_mean,
+            queryString: queryString,
+            topten: nonNullList.slice(0, 3),
+            bottomten: nonNullList.slice(-3).reverse()
         }));
     },
 
