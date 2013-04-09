@@ -134,8 +134,10 @@ b, strong, th {font-weight: bold;}
 .searchbar input.searchquery {
 	background: none;
 	border: none;
+	box-shadow: none;
 	-webkit-box-shadow: none;
 	font-size: 18px;
+	uneditable-input: 
 }
 
 .searchbar input.searchquery:focus {
@@ -149,10 +151,25 @@ button.searchbutton.btn {
 	float: left;
 	background: none;
 	border: none;
+	box-shadow: none;
 	-webkit-box-shadow: none;
 	-webkit-border-radius: 0px!important;
  	-moz-border-radius: 0px!important;
+  	-moz-box-shadow: none;
   	border-radius: 0px!important;	
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #e9f4ef;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #e9f4ef;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #e9f4ef;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #e9f4ef;
 }
 
 button.searchbutton.btn:hover {
@@ -219,7 +236,7 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 
 #details ul.indicators li h4 {font-size: 1.6em;}
 
-#details div.progress {position: relative; height: 50px; color: #212121;}
+#details div.progress {position: relative; height: 50px; color: #212121;    filter: none!important;}
 
 #details div.progress span.deaths {position: absolute; z-index: 1; height: 50px; padding-left: 8px; margin: auto; font-size: 20px;	line-height: 37px;}
 
