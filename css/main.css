@@ -141,8 +141,8 @@ b, strong, th {font-weight: bold;}
 .searchbar input.searchquery:focus {
   border:none;
   -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-          box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 button.searchbutton.btn {
@@ -150,6 +150,15 @@ button.searchbutton.btn {
 	background: none;
 	border: none;
 	-webkit-box-shadow: none;
+	-webkit-border-radius: 0px!important;
+ 	-moz-border-radius: 0px!important;
+  	border-radius: 0px!important;	
+}
+
+button.searchbutton.btn:hover {
+  color: #feffff;
+  background-color: #df5b38;
+  *background-color: #df5b38;
 }
 
 #es-map-details {position: absolute; position: absolute; top: 50px; bottom: 0; z-index: 8000; width: 400px; overflow: hidden;     -moz-box-shadow: 0 0 5px #888;
