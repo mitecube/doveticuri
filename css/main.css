@@ -138,6 +138,13 @@ b, strong, th {font-weight: bold;}
 	font-size: 18px;
 }
 
+.searchbar input.searchquery:focus {
+  border:none;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}
+
 button.searchbutton.btn {
 	float: left;
 	background: none;
