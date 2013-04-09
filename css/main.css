@@ -330,7 +330,7 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 
 #hidden-indicators ul.hidden-indicators li {
 	display: block;
-	width: 103px;
+	width: 100px;
 	float: left;
 	height: 100px;
 	min-widthheight: 100px;
