@@ -294,6 +294,7 @@ var esMapView = Backbone.View.extend({
     highlightCtrl: null,
     selectCtrl: null,
     markers: null,
+    featuresMap: {},
     mapnik: null,
     fromProjection: null,
     toProjection: null,
@@ -343,8 +344,10 @@ var esMapView = Backbone.View.extend({
         );
         /* END GMAP Section */
 
+        _.bindAll(this, "selectMarker", "updateMarkers", "render");
         this.vent = options.vent;
         this.model.bind('search:end', this.updateMarkers, this);
+        this.vent.bind('marker:select', this.selectMarker, this);
 
         this.render();
     },
@@ -371,7 +374,6 @@ var esMapView = Backbone.View.extend({
         this.map = new OpenLayers.Map("map", options);
         this.map.addLayer(this.defaultLayer);
         this.map.setCenter(this.center, zoom);
-
 
         /* GMAP Section */
         var stylez = [
@@ -514,7 +516,7 @@ var esMapView = Backbone.View.extend({
         hits = resultsModel.getResults();
 
         if (hits == null) return;
-
+        this.featuresMap = {};
         var that = this;
         $.each(hits, function(i, hit) {
             var ll = hit._source.geo.split(',');
@@ -523,9 +525,12 @@ var esMapView = Backbone.View.extend({
                 .transform( that.fromProjection, that.toProjection);
 
             point = new OpenLayers.Geometry.Point(latLon.lon, latLon.lat);
-            that.markers.addFeatures([
-                new OpenLayers.Feature.Vector(
-                    point, {hit: hit, title: hit._source.name})])
+
+            var feature = new OpenLayers.Feature.Vector(
+                point, {hit: hit, title: hit._source.name});
+
+            that.featuresMap[hit._source.id] = feature;
+            that.markers.addFeatures([feature]);
         });
 
         this.highlightCtrl = new OpenLayers.Control.SelectFeature(this.markers, {
@@ -545,7 +550,10 @@ var esMapView = Backbone.View.extend({
                 that.vent.trigger('show:details', e.attributes.hit);
             },
             onUnselect: function(e) {
-                that.vent.trigger('hide:details');
+                // Hide details if no more markers are selected
+                if (that.markers.selectedFeatures.length == 0) {
+                    that.vent.trigger('hide:details');
+                }
             }
         });
 
@@ -560,7 +568,21 @@ var esMapView = Backbone.View.extend({
         var bounds = this.markers.getDataExtent();
         this.map.zoomToExtent(bounds);
 
+    },
+
+    selectMarker: function(id) {
+        if (typeof this.featuresMap[id] != 'undefined') {
+            var selectedFeatures = this.markers.selectedFeatures;
+            this.selectCtrl.select(this.featuresMap[id]);
+            var that = this;
+            $.each(selectedFeatures, function(index, feature) {
+                if (typeof feature != 'undefined') {
+                    that.selectCtrl.unselect(feature);
+                }
+            });
+        }
     }
+
 
 });
 
@@ -659,11 +681,12 @@ var esDetailsView = Backbone.View.extend({
 var esTopTenView = Backbone.View.extend({
 
     events : {
-        'click a.close' : 'hide'
+        'click a.close' : 'hide',
+        'click li.hospital' : 'hospitalClick'
     },
 
     initialize: function(options) {
-        _.bindAll(this, "calculate", "hide");
+        _.bindAll(this, "calculate", "hide", "hospitalClick");
         this.vent = options.vent;
         this.vent.bind("calculate:topten", this.calculate);
         this.vent.bind("hide:details", this.hide);
@@ -714,7 +737,13 @@ var esTopTenView = Backbone.View.extend({
 
     hide: function() {
         this.$el.empty();
+    },
+
+    hospitalClick: function(evt) {
+        var hospital_id = $(evt.currentTarget).attr('href');
+        this.vent.trigger('marker:select', hospital_id);
     }
+
 });
 
 var esMapAppView = Backbone.View.extend({
