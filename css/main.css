@@ -322,6 +322,7 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 	font-weight: normal;
 	font-style: normal;
 	margin-left: 8px;
+	white-space: nowrap;
 }
 
 #rankings span.search-query {
