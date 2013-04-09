@@ -43,7 +43,7 @@ var esSearchQueryModel = Backbone.Model.extend({
             curr.query.filtered.query = {
                 query_string: {
                     fields : ["name", "location.city", "location.province", "location.province_ext", "location.region"],
-                    default_operator: "OR",
+                    default_operator: "AND",
                     query: ''
                 }
             };
