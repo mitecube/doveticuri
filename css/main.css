@@ -100,7 +100,7 @@ b, strong, th {font-weight: bold;}
 .headerPlus nav h3 a:hover {color: #FFF;}
 .headerPlus nav .twitter,
 .headerPlus nav .facebook {text-indent: -9999px;}
-.headerPlus nav .twitter .icon {width: 33px; height: 27px; margin: -14px 0 0 -16px; background-position: -110px -6px;}
+.headerPlus nav .twitter .icon {width: 33px; height: 27px; margin: -14px 0 0 10px; background-position: -110px -6px;}
 .headerPlus nav .facebook .icon {width: 15px; height: 31px; margin: -14px 0 0 -7px; background-position: -119px -46px;}
 
 
@@ -118,13 +118,33 @@ b, strong, th {font-weight: bold;}
 #loader {position: absolute; top: 0; left: 0; z-index: 9999; width: 100%; height: 100%; background-color: #feffff; opacity: 0.8; filter: alpha(opacity=80);}
 
 
-.searchbar {position: absolute; top: 0px; z-index:999; width: 100%; padding: 10px; background: #add6ca; overflow: hidden;
-    text-align: center;    
+.searchbar {position: absolute; top: 0px; z-index:999; width: 100%; padding: 10px; background: #add6ca; overflow: hidden;    
     -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px#888;
     box-shadow: 0 0 5px #888;
 }
-.searchbar .search {display: block; width: 100%; margin: 0;}
+.searchbar .search {display: block; margin: 0;
+	width: 93%;
+}
+.searchbar .span6 {
+    width: 90%!important;
+	margin: 0;
+}
+
+.searchbar input.searchquery {
+	background: none;
+	border: none;
+	-webkit-box-shadow: none;
+	font-size: 18px;
+}
+
+button.searchbutton.btn {
+	float: left;
+	background: none;
+	border: none;
+	-webkit-box-shadow: none;
+}
+
 #es-map-details {position: absolute; position: absolute; top: 50px; bottom: 0; z-index: 8000; width: 400px; overflow: hidden;     -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px#888;
     box-shadow: 0 0 5px #888;}
