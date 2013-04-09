@@ -90,18 +90,22 @@ b, strong, th {font-weight: bold;}
 /* | nav | */
 .headerPlus nav {float: right;}
 .headerPlus nav ul {height: 80px; margin: 0;}
-.headerPlus nav ul li {display: inline; float: left;}
+.headerPlus nav ul li {display: block;
+	float: left;
+}
 .headerPlus nav h3 { margin: 0; color: #58595b; font: normal 2em/80px 'Titillium Web', Helvetica, Arial, sans-serif;
-	padding: 0 0.5em;
 }
 .headerPlus nav h3 a {display: block; position: relative; color: #58595b;
     transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease;	-ms-transition: all 0.5s ease;
 }
 .headerPlus nav h3 a:hover {color: #FFF;}
 .headerPlus nav .twitter,
-.headerPlus nav .facebook {text-indent: -9999px;}
-.headerPlus nav .twitter .icon {width: 33px; height: 27px; margin: -14px 0 0 10px; background-position: -110px -6px;}
+.headerPlus nav .facebook {width: 52px; height: 27px; text-indent: -9999px;
+	display: block;
+}
+.headerPlus nav .twitter .icon {width: 34px; height: 31px; margin: -14px 0 0 1px; background-position: -110px -6px;}
 .headerPlus nav .facebook .icon {width: 15px; height: 31px; margin: -14px 0 0 -7px; background-position: -119px -46px;}
+
 
 
 /* | CONTENT |
@@ -236,7 +240,8 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 
 #details ul.indicators li h4 {font-size: 1.6em;}
 
-#details div.progress {position: relative; height: 50px; color: #212121;    filter: none!important;}
+#details div.progress {position: relative; height: 50px; color: #212121;    
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";}
 
 #details div.progress span.deaths {position: absolute; z-index: 1; height: 50px; padding-left: 8px; margin: auto; font-size: 20px;	line-height: 37px;}
 
@@ -265,12 +270,14 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 #details div.progress .bar-danger {
     background-color: #df5b38;
     background-image: none;
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";    
 }
 
 
 #details div.progress .bar-success {
     background-color: #d1fbe5;
     background-image: none;
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";    
 }
 
 #details div.progress .national-mean {
@@ -279,7 +286,7 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
     border-right: 5px solid #989898;
     background-image: none;
     background-color: transparent;
-
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";
 }
 
 #details span.national-mean {
