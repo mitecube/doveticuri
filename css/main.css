@@ -588,13 +588,15 @@ ul.partner .logoWired {width: 145px; background: transparent url(../images/logo_
 ul.partner .logoMitecube {width: 123px; background: transparent url(../images/logo_mitecube.png) no-repeat center center;}
 
 
-
-
-
-
-
-
 /* @group Responsive */
+@media only screen
+and (min-width : 480px) and (max-width : 600px) {
+	.headerPlus hgroup span {font-size: 0.9em;}
+	.headerPlus nav h3 a { font-size: 0.7em; }
+	.wpFooter .social p { font-size: 0.5em; }
+}
+	
+
 
 @media only screen
 and (min-width : 320px) and (max-width : 480px) {
