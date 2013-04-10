@@ -895,6 +895,7 @@ var esMapApp = new esMapAppView( {
 
 
 $(function() {
+    $('body').scrollTop(1);
     //$('#wrapper').height($(window).height());
     esSearchQuery.search();
     //$('nav a').tooltip({'placement':'bottom'});

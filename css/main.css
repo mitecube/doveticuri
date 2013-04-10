@@ -649,19 +649,27 @@ and (min-width : 320px) and (max-width : 480px) {
 	z-index: 8000;
 }
     #details p, #details h3, #details h4 {margin: 0;}
-    #details div.header {position: fixed; width: 98%!important; height: 80px; margin: 0; overflow: hidden;
+    #details div.header {position: fixed; width: 100%; height: 80px; margin: 0; overflow: hidden;
         background-color: #add6ca;
         padding-top: 0;
         padding-left: 0;
         padding-right: 0;
         z-index:3;
     }
+    #details div.struttura,
+    #details div.dimensione {    
+    	font-size: 0.7em;
+	}
+    
     #details div.struttura { width: 64%; height: 100%; }
-    #details div.dimensione { width: 25%; height: 100%;
+    #details div.dimensione { width: 22%; height: 100%;
 	float: left;
 	margin-left: 3px;
-}
+	}
+	
+	#details div.struttura h3 {
 
+}
 
     #details ul.indicators { margin-top: 87px; }
     #details ul.indicators li { margin: 1px 0 0 0;
@@ -676,7 +684,7 @@ and (min-width : 320px) and (max-width : 480px) {
     #details div.progress {width: 50%; float: right;}
     #details span.national-mean { display: none; }
 
-    #rankings {width: 100%; height: 100%; margin: 0; padding: 0; }
+    #rankings {width: 100%; height: 100%; margin: 0; padding: 0; 	overflow-y: auto;}
     #rankings h4 {
         height: 30px;
         padding-top: 12px;
@@ -691,7 +699,7 @@ and (min-width : 320px) and (max-width : 480px) {
 
     #details .close {
         opacity: 1.0!important;
-        margin-right: 10px!important;
+        margin-right: 4px;
         margin-top: 60px!important;
         position: fixed!important;
         top: 0px!important;
@@ -703,7 +711,7 @@ and (min-width : 320px) and (max-width : 480px) {
 	#rankings .close {
         display: block;	
         opacity: 1.0!important;        
-        margin-right: 10px!important;
+        margin-right: 4px;
         margin-top: 15px;        
 	}
 
@@ -713,9 +721,14 @@ and (min-width : 320px) and (max-width : 480px) {
     }
     
     #rankings ul {
-	margin-top: 10px;
+		margin-top: 10px;
+	clear: both;
+	width: 100%;
 }
-
+	
+	#rankings ul li.hospital {
+	white-space: nowrap;
+}
 
     #rankings ul li.hospital span.name {
         overflow: hidden;
