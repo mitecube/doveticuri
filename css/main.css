@@ -609,7 +609,8 @@ and (min-width : 320px) and (max-width : 480px) {
     .headerPlus hgroup {position: relative; height: 44px; padding: 0 0 0 5em;}
 
     .headerPlus nav {display: none;}
-
+	.modal-backdrop { z-index: 9000!important; }
+	.bootbox.modal { z-index: 9001!important; }
     .content {position: absolute; top: 54px; bottom: 44px; width: 100%;}
 
     .wpFooter {position: absolute;}
