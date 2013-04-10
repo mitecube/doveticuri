@@ -112,7 +112,10 @@ b, strong, th {font-weight: bold;}
 ===================================================== */
 .content {position: absolute; top: 100px; bottom: 44px; left: 0; width: 100%;}
 .main {position : absolute; z-index  : 0; width: 100%; height: 100%; overflow: hidden;}
-.main p {font-size: 1.3em;}
+.main p {font-size: 1.3em;
+	margin-bottom: 0;
+	line-height: normal;
+}
 
 .fuelux .close {opacity: 0.5; filter: alpha(opacity=40);}
 .fuelux .close:hover {opacity: 0.8; filter: alpha(opacity=80);}
@@ -238,7 +241,8 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 #details ul.indicators li {
     list-style: none;
     margin-top: 5px;
-    background-color: #add6ca;  
+    background-color: #add6ca;
+	line-height: 15px;
 }
 
 #details ul li:hover {
@@ -247,10 +251,14 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
     border: 3px solid #df5b38;
 }
 
-#details ul.indicators li h4 {font-size: 1.6em;}
+#details ul.indicators li h4 {font-size: 1.6em;
+	margin-top: 0;
+}
 
 #details div.progress {position: relative; height: 50px; color: #212121;    
--ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";}
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";
+	margin-bottom: 0;
+}
 
 #details div.progress span.deaths {position: absolute; z-index: 1; height: 50px; padding-left: 8px; margin: auto; font-size: 20px;	line-height: 37px;
 	left: 0;
@@ -302,14 +310,18 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 
 #details span.national-mean {
     position: relative;
-    top: -19px;
     font-size: 14px;
     margin-left: -5px;
+	top: 2px;
 }
 
 #details span.national-mean i.arrow {
     font-size: 15px;
     margin-right: 4px;
+}
+
+#details p.disease_description {
+	margin-top: 10px;
 }
 
 #hidden-indicators {
@@ -651,16 +663,18 @@ and (min-width : 320px) and (max-width : 480px) {
 
     #details ul.indicators { margin-top: 87px; }
     #details ul.indicators li { margin: 1px 0 0 0;
-        height: 49px;
+        height: 45px;
     }
-    #details p.disease_description { clear: both; }
+    #details p.disease_description {
+	clear: both;
+}
 
     #details h4	{width: 40%; float: left; overflow: hidden; height: 100%; line-height: normal; }
     #details div.progress span.hospitalized { right: 8px; }
     #details div.progress {width: 50%; float: right;}
     #details span.national-mean { display: none; }
 
-    #rankings {width: 100%; height: 100%; margin: 0; padding: 0; }
+    #rankings {width: 100%; height: 40%; margin: 0; padding: 0; }
     #rankings h4 {
         height: 30px;
         padding-top: 12px;
@@ -673,7 +687,7 @@ and (min-width : 320px) and (max-width : 480px) {
 	margin-right: 10px;
 }
 
-    #rankings .close, #details .close {
+    #details .close {
         opacity: 1.0!important;
         margin-right: 10px!important;
         margin-top: 60px!important;
@@ -684,16 +698,12 @@ and (min-width : 320px) and (max-width : 480px) {
         display: block;
     }
 
-    #rankings ul:nth-of-type(1) {
-        margin-top: 50px;
-    }
-
-    #rankings ul {
-        display:block;
-        float: none;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+	#rankings .close {
+        display: block;	
+        opacity: 1.0!important;        
+        margin-right: 10px!important;
+        margin-top: 15px;        
+	}
 
     #rankings h4 {
         padding-left: 10px;
