@@ -574,11 +574,12 @@ li.disease.national_deaths:before {
     transition: all 0.5s ease; -moz-transition: all 0.5s ease; -webkit-transition: all 0.5s ease; -o-transition: all 0.5s ease;	-ms-transition: all 0.5s ease;
 }
 .wpFooter .social .twitter:hover .icon {background-position: -6px -98px;}
-.wpFooter .social p {
+.wpFooter .social a.dati {
     line-height: 44px;
     font-size: 14px;
     width: 100%;
     color: #4b4b4b;
+    text-indent: 0!important;
 }
 
 ul.partner {height: 44px; float: right; margin: 0;}
@@ -593,7 +594,7 @@ ul.partner .logoMitecube {width: 123px; background: transparent url(../images/lo
 and (min-width : 480px) and (max-width : 600px) {
 	.headerPlus hgroup span {font-size: 0.9em;}
 	.headerPlus nav h3 a { font-size: 0.7em; }
-	.wpFooter .social p { font-size: 0.5em; }
+	.wpFooter .social a { font-size: 0.5em; }
 }
 	
 

@@ -19,9 +19,13 @@ var esSearchQueryModel = Backbone.Model.extend({
             data: JSON.stringify( this.toJSON() ),
             success: function(json, statusText, xhr) {
                 var data = json;
-                t.resultsModel.hasResults = true;
-                t.resultsModel.hasError = false;
-                t.resultsModel.set( data );
+                if (data.hits.total == 0) {
+                    bootbox.alert("<h4>Nessun risultato trovato.</h4>");
+                } else {
+                    t.resultsModel.hasResults = true;
+                    t.resultsModel.hasError = false;
+                    t.resultsModel.set( data );
+                }
                 t.trigger( 'search:end' );
             },
             error: function(xhr, message, error) {
