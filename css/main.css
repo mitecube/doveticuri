@@ -252,7 +252,9 @@ div.olControlZoom a {background: #797979!important; /*background: rgba(121, 121,
 #details div.progress {position: relative; height: 50px; color: #212121;    
 -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";}
 
-#details div.progress span.deaths {position: absolute; z-index: 1; height: 50px; padding-left: 8px; margin: auto; font-size: 20px;	line-height: 37px;}
+#details div.progress span.deaths {position: absolute; z-index: 1; height: 50px; padding-left: 8px; margin: auto; font-size: 20px;	line-height: 37px;
+	left: 0;
+}
 
 
 #details div.progress i {
